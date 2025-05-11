@@ -1,0 +1,32 @@
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+    content: [
+        "./resources/**/*.blade.php",
+        "./resources/**/*.js",
+        "./resources/**/*.vue",
+    ],
+    theme: {
+        extend: {
+            colors: {
+                primary: "#006546",
+                secondary: "#4a7c59",
+                accent: "#6B9E4B",
+                transparent: 'transparent',
+                current: 'currentColor',
+                'white': '#ffffff',
+                'purple': '#3f3cbb',
+                'midnight': '#121063',
+                'metal': '#565584',
+                'tahiti': '#3ab7bf',
+                'silver': '#ecebff',
+                'bubble-gum': '#ff77e9',
+                'bermuda': '#78dcca',
+                'ijobg': '#034833',
+                'ijofont':'#E1EEBC',
+                'ijologin':'#67AE6E',
+                "light-accent": "#8ABD5F",
+            },
+        },
+    },
+    plugins: [],
+};

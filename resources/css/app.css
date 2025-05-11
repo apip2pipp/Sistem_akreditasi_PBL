@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .btn-primary {
+    @apply bg-accent hover:bg-light-accent text-white font-medium py-2 px-6 rounded-md;
+  }
+  .btn-outline {
+    @apply bg-transparent hover:bg-primary text-primary hover:text-white font-medium py-2 px-6 border border-primary hover:border-transparent rounded-md;
+  }
+  .nav-link {
+    @apply text-white hover:text-gray-200 px-4 py-2;
+  }
+  .section-title {
+    @apply text-3xl font-bold text-primary mb-6;
+  }
+  .read-more {
+    @apply inline-flex items-center text-white bg-primary hover:bg-secondary py-2 px-4 rounded-md;
+  }
+}
