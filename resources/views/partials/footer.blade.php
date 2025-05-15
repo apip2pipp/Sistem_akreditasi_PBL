@@ -1,4 +1,4 @@
-<footer class="bg-primary text-white">
+<footer class="bg-ijobg text-white">
     <div class="container mx-auto px-4 py-12">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div>
@@ -8,9 +8,9 @@
                     </svg>
                     <span class="font-bold text-2xl">ACREDITATION</span>
                 </div>
-                
+
                 <p class="mb-6">We are ready to assist your study program accreditation process in order to meet the set educational standards.</p>
-                
+
                 <div class="flex space-x-4">
                     <a href="#" class="text-white hover:text-accent">
                         <i class="fab fa-facebook-f"></i>
@@ -26,7 +26,7 @@
                     </a>
                 </div>
             </div>
-            
+
             <div>
                 <h3 class="font-semibold text-xl mb-6">Layanan Terkait</h3>
                 <ul class="space-y-4">
@@ -56,7 +56,7 @@
                     </li>
                 </ul>
             </div>
-            
+
             <div>
                 <h3 class="font-semibold text-xl mb-6">Sertifikasi</h3>
                 <ul class="space-y-4">
@@ -82,8 +82,8 @@
             </div>
         </div>
     </div>
-    
-    <div class="bg-primary border-t border-gray-700">
+
+    <div class="bg-ijobg border-t border-gray-700">
         <div class="container mx-auto px-4 py-4 flex flex-col md:flex-row justify-between items-center text-sm">
             <p>© Copyright 2023 | The Accreditation Program</p>
             <div class="flex space-x-6 mt-4 md:mt-0">

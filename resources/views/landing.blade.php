@@ -3,12 +3,12 @@
 @section('content')
 @vite('resources/css/app.css')
 <!-- Hero Section -->
-<section class="relative bg-cover bg-center h-[500px]" style="background-image: url('{{ asset('images/campus-bg.jpg') }}');">
-    <div class="absolute inset-0 bg-primary bg-opacity-70"></div>
+<section class="relative bg-cover bg-center h-[1250px]" style="background-image: url('{{ asset('img/gedung.png') }}');">
+    <div class="absolute inset-0 bg-primary bg-opacity-50"></div>
     <div class="container mx-auto px-4 h-full flex items-center relative z-10">
         <div class="max-w-2xl">
-            <div class="relative inline-block mb-2 mt-2">
-  <div class="relative px-4 py-2 text-ijofont font-bold bg-ijobg rounded-md ">
+            <div class="relative inline-block mb-20 mt-2">
+  <div class="relative px-4 py-2 text-ijofont font-bold bg-ijobg rounded-md">
     THE ACREDITATION
   </div>
 </div>
@@ -172,7 +172,7 @@
 </section>
 
 <!-- CTA Section -->
-<section class="py-12 bg-primary">
+<section class="py-12 bg-ijobg">
     <div class="container mx-auto px-4">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div class="bg-opacity-10 bg-white p-6 rounded-lg flex items-center">

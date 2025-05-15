@@ -15,5 +15,5 @@ use Illuminate\Support\Facades\Route;
 
 // routes/web.php
 Route::get('/', function () {
-    return view('home'); // Pastikan file home.blade.php ada di resources/views
+    return view('landing'); // Pastikan file home.blade.php ada di resources/views
 })->name('home'); // Ini memberikan nama 'home' pada route
