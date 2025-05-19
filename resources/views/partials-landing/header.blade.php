@@ -22,7 +22,7 @@
                     </div>
                 </nav>
 
-                <a href="#" class="ml-4 bg-ijologin hover:bg-light-accent text-white font-semibold py-2 px-8 rounded-md ">
+                <a href="{{ route('login') }}" class="ml-4 bg-ijologin hover:bg-light-accent text-white font-semibold py-2 px-8 rounded-md ">
                     Login
                 </a>
 
