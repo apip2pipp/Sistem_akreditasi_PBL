@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MLevelController;
+use App\Http\Controllers\MUserController;
+use App\Http\Controllers\Auth\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,5 +18,10 @@ use Illuminate\Support\Facades\Route;
 
 // routes/web.php
 Route::get('/', function () {
-    return view('landing'); // Pastikan file home.blade.php ada di resources/views
+    return view('landing-page'); // Pastikan file home.blade.php ada di resources/views
 })->name('home'); // Ini memberikan nama 'home' pada route
+
+
+Route::get('/login', [AuthController::class, 'viewLogin'])->name('login.view');
+Route::post('/login', [AuthController::class, 'login'])->name('login');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
