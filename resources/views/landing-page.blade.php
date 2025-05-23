@@ -8,23 +8,29 @@
     <div class="container mx-auto px-4 h-full flex items-center relative z-10">
         <div class="max-w-2xl">
             <div class="relative inline-block mb-20 mt-2">
-  <div class="relative px-4 py-2 text-ijofont font-bold bg-ijobg rounded-md">
-    THE ACREDITATION
-  </div>
-</div>
+                <div class="relative px-4 py-2 text-ijofont font-bold bg-ijobg rounded-md">
+                    THE ACREDITATITON
+                </div>
+            </div>
             <h1 class="text-4xl md:text-5xl font-bold text-ijofont mb-6">THIS IS AN ACCREDITATION WEBSITE FOR ACCREDITING CAMPUS, DEPARTMENT OR STUDY PROGRAM</h1>
             <p class="text-ijofont mb-8">You are part of advancing the results for value that we share.</p>
-            <a href="#" class="read-more text-ijofont  bg-ijobg ">
+            <a href="#" class="inline-flex items-center px-6 py-3 text-ijofont bg-ijobg rounded-full hover:bg-opacity-90 transition">
                 Read More
                 <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
                 </svg>
             </a>
         </div>
-        <div class="hidden md:flex absolute right-10 bottom-0 space-x-4">
-            <img src="{{ asset('images/university-logo.png') }}" alt="University Logo" class="h-32 w-32 rounded-lg">
-            <img src="{{ asset('images/accreditation-logo.png') }}" alt="Accreditation Logo" class="h-32 w-32 rounded-lg">
-        </div>
+
+        <!-- Logo Polinema -->
+<div class="absolute right-48 top-[30%] z-20">  <!-- Pindah lebih dekat ke kanan (right-8) dan turunkan sedikit (top-[30%]) -->
+    <img src="{{ asset('img/Polinema.png') }}" alt="University Logo" class="h-56 w-56">  <!-- Ukuran sedikit diperkecil (h-36 w-36) -->
+</div>
+
+<!-- Logo JTI -->
+<div class="absolute right-0 top-[48%] z-20">  <!-- Posisi horizontal sama (right-8), vertikal lebih bawah (top-[55%]) -->
+    <img src="{{ asset('img/jti.png') }}" alt="Study Program Logo" class="h-56 w-56">  <!-- Ukuran sama dan hapus mb-10 -->
+</div>
     </div>
 </section>
 
@@ -80,10 +86,10 @@
                         <div class="text-4xl font-bold">27</div>
                         <div class="text-sm">January 1979</div>
                     </div>
-                    <img src="{{ asset('images/classroom.jpg') }}" alt="Classroom" class="rounded-lg shadow-lg mb-6">
-                    <img src="{{ asset('images/students.jpg') }}" alt="Students" class="rounded-lg shadow-lg">
+                    <img src="{{ asset('img/class.png') }}" alt="Classroom" class="rounded-lg shadow-lg mb-6">
+                    <img src="{{ asset('img/tour.png') }}" alt="Students" class="rounded-lg shadow-lg">
                     <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2">
-                        <img src="{{ asset('images/accreditation-logo-large.png') }}" alt="Accreditation Logo" class="h-24">
+                        <img src="{{ asset('img/f_logo.png') }}" alt="Accreditation Logo" class="h-24">
                     </div>
                 </div>
             </div>
