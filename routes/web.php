@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MLevelController;
 use App\Http\Controllers\MUserController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Auth\AuthController;
 
 /*
@@ -18,10 +19,20 @@ use App\Http\Controllers\Auth\AuthController;
 
 // routes/web.php
 Route::get('/', function () {
-    return view('landing-page'); // Pastikan file home.blade.php ada di resources/views
-})->name('home'); // Ini memberikan nama 'home' pada route
-
+    return view('landing-page'); })->name('home');
 
 Route::get('/login', [AuthController::class, 'viewLogin'])->name('login.view');
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+        //level
+        Route::resource('level', MLevelController::class);
+        Route::post('level/list', [MLevelController::class, 'list'])->name('level.list');
+        Route::get('level/{id}/delete', [MLevelController::class, 'confirm']);
+
+        //user
+        Route::resource('user', MUserController::class);
+        Route::post('user/list', [MUserController::class, 'list'])->name('user.list');
+        Route::get('user/{id}/delete', [MUserController::class, 'confirm']);
