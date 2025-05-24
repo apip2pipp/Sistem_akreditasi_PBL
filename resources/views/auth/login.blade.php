@@ -13,7 +13,7 @@
 
 
     <!-- Left Side - Logo Area -->
-    <div class="w-1/2 flex flex-col items-center justify-center text-white px-8 relative bg-cover bg-center" 
+    <div class="w-1/2 flex flex-col items-center justify-center text-white px-8 relative bg-cover bg-center"
         style="background-image: url('{{ asset('img/gedung_jti.png') }}');">
         <!-- Layer blur -->
         <div class="absolute inset-0 backdrop-blur-sm bg-ijologin/50"></div>
@@ -78,10 +78,12 @@
 </div>
 
 <div>
+    <a href="{{ route('home') }}">
     <button type="button"
         class="w-full px-4 py-2.5 rounded-xl shadow-md bg-ijobg text-white font-medium text-center hover:bg-green-700 transition duration-200">
         Back To Home page
     </button>
+    </a>
 </div>
                     </form>
 
