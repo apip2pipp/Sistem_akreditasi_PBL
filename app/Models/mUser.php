@@ -30,5 +30,9 @@ class mUser extends Authenticatable
         return 'username'; // Agar Auth tahu login pakai kolom username
     }
 
+    public function level()
+    {
+        return $this->belongsTo(mLevel::class, 'level_id');
+    }
 
 }

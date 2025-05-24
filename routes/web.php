@@ -25,8 +25,12 @@ Route::get('/login', [AuthController::class, 'viewLogin'])->name('login.view');
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
+Route::middleware(['auth'])->group(function () {
+
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
+        // management-users
+        Route::group(['prefix' => 'management-users', 'middleware' => ['auth']], function () {
         //level
         Route::resource('level', MLevelController::class);
         Route::post('level/list', [MLevelController::class, 'list'])->name('level.list');
@@ -36,3 +40,5 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard
         Route::resource('user', MUserController::class);
         Route::post('user/list', [MUserController::class, 'list'])->name('user.list');
         Route::get('user/{id}/delete', [MUserController::class, 'confirm']);
+        });
+});

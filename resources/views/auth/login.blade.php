@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,8 +8,10 @@
     @vite('resources/css/app.css')
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Wix+Madefor+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Wix+Madefor+Text:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
 </head>
+
 <body class="bg-ijobg min-h-screen flex">
 
 
@@ -50,49 +53,48 @@
             <form method="POST" action="{{ route('login') }}" class="space-y-4">
                 @csrf
 
-                    <!-- Login Form -->
-                    <form class="space-y-4">
-                        <!-- Input Username -->
-                        <div>
-                            <input type="text" name="Username" id="Username"
-                                class="w-full px-4 py-2.5 rounded-xl border-black shadow-md bg-green-100 focus:outline-none focus:ring-2 focus:ring-green-500"
-                                placeholder="Username" required>
-                        </div>
+                <!-- Login Form -->
+                <form class="space-y-4">
+                    <!-- Input Username -->
+                    <div>
+                        <input type="text" name="username" id="username"
+                            class="w-full px-4 py-2.5 rounded-xl border-black shadow-md bg-green-100 focus:outline-none focus:ring-2 focus:ring-green-500"
+                            placeholder="username" required>
+                    </div>
 
-                        <!-- Input Password -->
-                        <div class="mb-6">
-                            <input type="password" name="password" id="password"
-                                class="w-full px-4 py-2.5 rounded-xl border-black shadow-md bg-green-100 focus:outline-none focus:ring-2 focus:ring-green-500"
-                                placeholder="Password" required>
-                        </div>
+                    <!-- Input Password -->
+                    <div class="mb-6">
+                        <input type="password" name="password" id="password"
+                            class="w-full px-4 py-2.5 rounded-xl border-black shadow-md bg-green-100 focus:outline-none focus:ring-2 focus:ring-green-500"
+                            placeholder="Password" required>
+                    </div>
 
-                        <!-- Space between password and buttons -->
-                        <div class="pt-2"></div>
+                    <!-- Space between password and buttons -->
+                    <div class="pt-2"></div>
 
-                        <!-- Tombol Login -->
-<div class="mt-4">
-    <button type="submit"
-        class="w-full px-4 py-2.5 rounded-xl shadow-md bg-ijobg text-white font-medium text-center hover:bg-green-700 transition duration-200">
-        Login
-    </button>
-</div>
+                    <!-- Tombol Login -->
+                    <div class="mt-4">
+                        <button type="submit"
+                            class="w-full px-4 py-2.5 rounded-xl shadow-md bg-ijobg text-white font-medium text-center hover:bg-green-700 transition duration-200">
+                            Login
+                        </button>
+                    </div>
 
-<div>
-    <a href="{{ route('home') }}">
-    <button type="button"
-        class="w-full px-4 py-2.5 rounded-xl shadow-md bg-ijobg text-white font-medium text-center hover:bg-green-700 transition duration-200">
-        Back To Home page
-    </button>
-    </a>
-</div>
-                    </form>
+                    <div>
+                        <a href="{{ route('home') }}">
+                            <button type="button"
+                                class="w-full px-4 py-2.5 rounded-xl shadow-md bg-ijobg text-white font-medium text-center hover:bg-green-700 transition duration-200">
+                                Back To Home page
+                            </button>
+                        </a>
+                    </div>
+                </form>
 
-<div class="mt-10 text-center text-gray-500" style="font-size: 12px;">
-    &copy; Copyright 2025 | The Accreditation Program
-</div>
+                <div class="mt-10 text-center text-gray-500" style="font-size: 12px;">
+                    &copy; Copyright 2025 | The Accreditation Program
+                </div>
         </div>
     </div>
 </body>
+
 </html>
-
-

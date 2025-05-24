@@ -1,4 +1,4 @@
-@php
+{{-- @php
     use Illuminate\Support\Facades\Auth;
     use Illuminate\Support\Facades\DB;
 
@@ -24,7 +24,7 @@
         $listKriteria = DB::table('m_kriterias')->get();
         $showKriteria = true;
     }
-@endphp
+@endphp --}}
 
 
 <div class="sidebar">
@@ -73,7 +73,7 @@
                     </li>
                 </ul>
             </li>
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a href="{{ route('kriteria.index') }}"
                     class="nav-link {{ Request::routeIs('kriteria.index') ? 'active' : '' }}">
                     <i class="nav-icon far fa-image"></i>
@@ -81,8 +81,8 @@
                         Kriteria
                     </p>
                 </a>
-            </li>
-            @if ($listKriteria->isNotEmpty())
+            </li> --}}
+            {{-- @if ($listKriteria->isNotEmpty())
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-layer-group"></i>
@@ -103,8 +103,29 @@
                         @endforeach
                     </ul>
                 </li>
-            @endif
-            @if (auth()->user()->level->level_kode === 'ADM')
+            @endif --}}
+            {{-- @if (auth()->user()->level->level_kode === 'ADM') --}}
+
+<li class="nav-header">Settings User</li>
+            <li class="nav-item">
+                <a href="pages/gallery.html" class="nav-link">
+                    <i class="nav-icon far fa-image"></i>
+                    <p>
+                        Manage User
+                    </p>
+                </a>
+            </li>
+
+            </li>
+            <li class="nav-item">
+                <a href="pages/gallery.html" class="nav-link">
+                    <i class="nav-icon far fa-image"></i>
+                    <p>
+                        Manage Level
+                    </p>
+                </a>
+            </li>
+
                 <li
                     class="nav-item {{ Request::routeIs('user*') || Request::routeIs('level*') || Request::routeIs('dosen*') || Request::routeIs('kaprodi*') || Request::routeIs('koordinator*') || Request::routeIs('kjm*') || Request::routeIs('direktur-utama*') || Request::routeIs('ketua-jurusan*') ? 'menu-open' : '' }}">
                     <a href="#"
@@ -112,7 +133,7 @@
                         id="managementUsersLink">
                         <i class="nav-icon fas fa-users"></i>
                         <p>
-                            Management Users
+                            Academic Structure
                             <i class="fas fa-angle-left right"></i>
                         </p>
                     </a>
@@ -124,7 +145,7 @@
                                 <p>Role</p>
                             </a>
                         </li>
-                        <li class="nav-item">
+                        {{-- <li class="nav-item">
                             <a href="{{ route('direktur-utama.index') }}"
                                 class="nav-link {{ Request::is('direktur-utama*') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
@@ -165,7 +186,7 @@
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>koordinator</p>
                             </a>
-                        </li>
+                        </li> --}}
                         <li class="nav-item">
                             <a href="{{ route('user.index') }}"
                                 class="nav-link {{ Request::routeIs('user*') ? 'active' : '' }}">
@@ -175,9 +196,20 @@
                         </li>
                     </ul>
                 </li>
-            @endif
 
-            <li class="nav-item">
+                <li class="nav-header">Add Criteria</li>
+                <li class="nav-item">
+                <a href="pages/gallery.html" class="nav-link">
+                    <i class="nav-icon far fa-image"></i>
+                    <p>
+                        Manage Criteria
+                    </p>
+                </a>
+            </li>
+
+            {{-- @endif --}}
+
+            {{-- <li class="nav-item">
                 <a href="{{ route('permission-kriteria.index') }}"
                     class="nav-link {{ Request::routeIs('permission-kriteria.index') ? 'active' : '' }}">
                     <i class="nav-icon far fa-image"></i>
@@ -185,7 +217,7 @@
                         Permission Kriteria
                     </p>
                 </a>
-            </li>
+            </li> --}}
             <li class="nav-item">
                 <a href="pages/widgets.html" class="nav-link">
                     <i class="nav-icon fas fa-th"></i>
