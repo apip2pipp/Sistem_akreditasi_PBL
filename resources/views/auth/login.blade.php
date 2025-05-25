@@ -50,11 +50,23 @@
                 </p>
             </div>
 
+            <!-- Unsuccess Notification -->
+            @if($errors->any())
+            <div id="error-notification" class="mb-4 px-3 py-2 bg-red-100 border border-red-300 rounded-lg">
+                <div class="flex items-center">
+                    <svg class="w-4 h-4 text-red-600 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+                    </svg>
+                    <span class="text-sm text-red-700 font-medium">
+                        The username or password you entered is incorrect
+                    </span>
+                </div>
+            </div>
+            @endif
+
             <form method="POST" action="{{ route('login') }}" class="space-y-4">
                 @csrf
 
-                <!-- Login Form -->
-                <form class="space-y-4">
                     <!-- Input Username -->
                     <div>
                         <input type="text" name="username" id="username"
@@ -95,6 +107,7 @@
                 </div>
         </div>
     </div>
+    
 </body>
 
 </html>
