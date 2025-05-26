@@ -24,8 +24,8 @@ class mKoordinator extends Model
         return $this->belongsTo(mUser::class, 'user_id');
     }
 
-    // public function permissions()
-    // {
-    //     return $this->hasMany(tPermissionKriteriaUser::class, 'koordinator_id');
-    // }
+    public function permissions()
+    {
+        return $this->hasMany(tPermissionKriteriaUser::class, 'koordinator_id');
+    }
 }

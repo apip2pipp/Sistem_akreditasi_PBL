@@ -109,15 +109,16 @@
             <li class="nav-header">Settings User</li>
             <li class="nav-item">
                 <a href="{{ route('user.index') }}" class="nav-link {{ Request::routeIs('user*') ? 'active' : '' }}">
-                    <i class="far fa-circle nav-icon"></i>
+                    <i class="nav-icon fas fa-users"></i>
                     <p>User</p>
                 </a>
             </li>
+            
             <li class="nav-item">
                 <a href="{{ route('level.index') }}"
                     class="nav-link {{ Request::routeis('level*') ? 'active' : '' }}">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Role</p>
+                    <i class="nav-icon far fa-plus-square"></i>
+                    <p>Level</p>
                 </a>
             </li>
             @if (auth()->user()->level->level_kode === 'ADM')
@@ -126,7 +127,7 @@
                     <a href="#"
                         class="nav-link {{ Request::routeIs('dosen*') || Request::routeIs('kaprodi*') || Request::routeIs('koordinator*') || Request::routeIs('kjm*') || Request::routeIs('direktur-utama*') || Request::routeIs('ketua-jurusan*') ? 'active' : '' }}"
                         id="managementUsersLink">
-                        <i class="nav-icon fas fa-users"></i>
+                        <i class="nav-icon fas fa-ellipsis-h"></i>
                         <p>
                             Academic Stucture
                             <i class="fas fa-angle-left right"></i>
@@ -178,6 +179,33 @@
                     </ul>
                 </li>
             @endif
+
+            <li class="nav-header">Add Criteria</li>
+
+            {{-- manage criteria --}}
+            <li class="nav-item">
+                {{-- <a href="{{ route('kriteria.index') }}"
+                    class="nav-link {{ Request::routeIs('kriteria.index') ? 'active' : '' }}"> --}}
+                    <i class="nav-icon fas fa-book"></i>
+                    <p>
+                        Managae Criteria
+                    </p>
+                {{-- </a> --}}
+            </li>
+
+            <li class="nav-header">Setting Crriteria</li>
+
+            {{-- premission criteria --}}
+
+            <li class="nav-item">
+                {{-- <a href="{{ route('permission-kriteria.index') }}"
+                    class="nav-link {{ Request::routeIs('permission-kriteria.index') ? 'active' : '' }}"> --}}
+                    <i class="nav-icon fas fa-columns"></i>
+                    <p>
+                        Permission Kriteria
+                    </p>
+                {{-- </a> --}}
+            </li>
 
             {{-- <li class="nav-item">
                 <a href="{{ route('permission-kriteria.index') }}"
