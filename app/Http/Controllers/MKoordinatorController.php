@@ -68,7 +68,7 @@ class MKoordinatorController extends Controller
             ],
             'level_id' => 'required|exists:m_levels,level_id',
             'username' => 'required|string|unique:m_users,username|max:100',
-            'password' => 'required|string|min:8|confirmed',
+            'password' => 'required|string|min:8',
         ]);
 
         if ($validator->fails()) {
