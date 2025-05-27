@@ -9,8 +9,8 @@
 
             <div class="flex items-center">
                 <nav class="hidden md:flex items-center">
-                    <a href="{{ route('home') }}" class="nav-link font-semibold text-ijofont">Home</a>
-                    <a href="#" class="nav-link font-semibold text-ijofont">Information</a>
+                    <a href="{{ route('home') }}" class="nav-link font-semibold text-ijofont duration-300" data-target="home">Home</a>
+                    <a href="#" class="nav-link font-semibold text-ijofont transition duration-300" data-target="info">Information</a>
 
                     <!-- Dropdown Criteria -->
                     <div class="relative group">
