@@ -3,7 +3,8 @@
 @section('content')
     @vite('resources/css/app.css')
     <!-- Hero Section -->
-    <section class="relative bg-cover bg-center h-[1250px]" style="background-image: url('{{ asset('img/gedung.png') }}');">
+    <section id="home" class="relative bg-cover bg-center h-[1250px]"
+        style="background-image: url('{{ asset('img/gedung.png') }}');">
         <div class="absolute inset-0 bg-primary bg-opacity-50"></div>
         <div class="container mx-auto px-4 h-full flex items-center relative z-10">
             <div class="max-w-2xl">
@@ -15,7 +16,7 @@
                 <h1 class="text-4xl md:text-5xl font-bold text-ijofont mb-6">THIS IS AN ACCREDITATION WEBSITE FOR ACCREDITING
                     CAMPUS, DEPARTMENT OR STUDY PROGRAM</h1>
                 <p class="text-ijofont mb-8">You are part of advancing the results for value that we share.</p>
-                <a href="#"
+                <a href="https://www.instagram.com/apip.pipp/" target="_blank"
                     class="inline-flex items-center px-6 py-3 text-ijofont bg-ijobg rounded-full hover:bg-opacity-90 transition">
                     Read More
                     <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -42,7 +43,7 @@
     </section>
 
     <!-- Services Section -->
-    <section class="py-16">
+    <section id="info"class="py-16">
         <div class="container mx-auto px-4">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <!-- Akreditasi -->
@@ -85,7 +86,7 @@
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
                 <div class="lg:col-span-5">
                     <div class="relative">
-                        <img src="{{ asset('img\Component 2.png') }}" alt="Students" class="rounded-lg">
+                        <img src="{{ asset('img/Component2.png') }}" alt="Students" class="rounded-lg">
                     </div>
                 </div>
 
@@ -156,7 +157,7 @@
                     </div>
 
                     <div class="text-center">
-                        <a href="#"
+                        <a href="https://siakad.polinema.ac.id/login/index/err/6" target="_blank"
                             class="read-more bg-ijolanding text-white px-4 py-2 rounded inline-flex items-center hover:bg-ijobg">
                             Read More
                             <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -164,6 +165,7 @@
                                     d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
                             </svg>
                         </a>
+
                     </div>
                 </div>
             </div>
@@ -177,14 +179,14 @@
                 <div class="bg-opacity-10 bg-white p-6 rounded-lg flex items-center">
                     <div class="mr-6">
 
-                        <img src="img\bumi.png" class="w-20 h-20">
+                        <img src="{{ asset('img/bumi.png') }}" class="w-24 h-20">
 
                     </div>
                     <div>
                         <h3 class="text-xl font-semibold text-white mb-2">Need Any Support For Program Accreditation?</h3>
                         <p class="text-gray-200 mb-4">We provide professional assistance to help your program meet
                             accreditation standards.</p>
-                        <a href="#"
+                        <a href="https://www.instagram.com/apip.pipp/" target="_blank"
                             class="inline-block bg-white text-primary font-medium py-2 px-4 rounded-md hover:bg-gray-100">Contact
                             Us Now</a>
                     </div>
@@ -199,7 +201,7 @@
                             Quality?</h3>
                         <p class="text-gray-200 mb-4">Get a free consultation on how to improve your study program's
                             quality.</p>
-                        <a href="#"
+                        <a href="https://www.instagram.com/apip.pipp/" target="_blank"
                             class="inline-block bg-white text-primary font-medium py-2 px-4 rounded-md hover:bg-gray-100">Get
                             Started</a>
                     </div>
@@ -208,3 +210,27 @@
         </div>
     </section>
 @endsection
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+
+                const targetId = this.getAttribute('data-target');
+                const targetEl = document.getElementById(targetId);
+
+                if (targetEl) {
+                    targetEl.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+
+                    // Hapus hash dari URL jika ada
+                    history.replaceState(null, null, ' ');
+                }
+            });
+        });
+    });
+</script>
