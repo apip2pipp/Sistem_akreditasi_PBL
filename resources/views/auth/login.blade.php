@@ -69,8 +69,8 @@
 
                 <div>
                     <input type="text" name="username" id="username"
-                        class="w-full px-4 py-3 rounded-md bg-green-100/40 focus:outline-none focus:ring-2 focus:ring-green-500"
-                        placeholder="username" required>
+                        class="w-full px-4 py-3 rounded-md bg-green-100 focus:outline-none focus:ring-2 focus:ring-green-500"
+                        placeholder="Username" required>
                 </div>
 
                 <div>
@@ -110,7 +110,7 @@
             const formData = new FormData(form);
             const token = document.querySelector('input[name="_token"]').value;
 
-            // Hapus pesan sebelumnya
+            // Hapus feedback lama jika ada
             document.getElementById('feedback')?.remove();
 
             const response = await fetch("{{ route('login') }}", {
@@ -126,23 +126,37 @@
 
             const feedback = document.createElement('div');
             feedback.id = 'feedback';
-            feedback.className = 'mt-4 px-4 py-3 rounded relative text-sm text-center';
+            feedback.className = 'mt-4 px-4 py-3 rounded text-sm flex items-center gap-2 border';
 
             if (data.status === 'success') {
-                feedback.classList.add('bg-green-100', 'text-green-700', 'border', 'border-green-400');
-                feedback.textContent = data.message;
+                feedback.classList.add('bg-green-100', 'text-green-700', 'border-green-400');
+                feedback.innerHTML = `
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 text-green-700" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.707a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                    </svg>
+                    <span>${data.message}</span>
+                `;
+
                 form.before(feedback);
 
                 setTimeout(() => {
                     window.location.href = data.redirect;
                 }, 2000);
             } else {
-                feedback.classList.add('bg-red-100', 'text-red-700', 'border', 'border-red-400');
-                feedback.textContent = data.message;
+                feedback.classList.add('bg-red-100', 'text-red-700', 'border-red-400');
+            feedback.innerHTML = `
+                <div class="flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10" viewBox="0 0 24 24" fill="none">
+                        <circle cx="12" cy="12" r="10" fill="#DC2626"/>
+                        <rect x="11" y="6" width="2" height="8" rx="1" fill="white"/>
+                        <circle cx="12" cy="17" r="1.25" fill="white"/>
+                    </svg>
+                    <span>${data.message}</span>
+                </div>
+            `;
                 form.before(feedback);
             }
         });
     </script>
 </body>
-
 </html>
