@@ -35,4 +35,33 @@ class mUser extends Authenticatable
         return $this->belongsTo(mLevel::class, 'level_id');
     }
 
+    public function dosen()
+    {
+        return $this->hasOne(mDosen::class, 'user_id', 'user_id');
+    }
+
+    // Relasi ke kajur
+    public function kajur()
+    {
+        return $this->hasOne(mKajur::class, 'user_id', 'user_id');
+    }
+
+    // Relasi ke kjm
+    public function kjm()
+    {
+        return $this->hasOne(mKjm::class, 'user_id', 'user_id');
+    }
+
+    // Relasi ke dirut
+    public function dirut()
+    {
+        return $this->hasOne(mDirut::class, 'user_id', 'user_id');
+    }
+
+    // Relasi ke koordinator
+    public function koordinator()
+    {
+        return $this->hasOne(mKoordinator::class, 'user_id', 'user_id');
+    }
+
 }

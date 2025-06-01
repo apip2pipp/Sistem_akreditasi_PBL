@@ -24,9 +24,10 @@ class AuthController extends Controller
         $key = 'login-attempts:' . $request->ip();
 
         if (RateLimiter::tooManyAttempts($key, 5)) {
-            throw ValidationException::withMessages([
-                'username' => ['Terlalu banyak percobaan login. Silakan coba lagi dalam beberapa detik.'],
-            ]);
+           return response()->json([
+                'status' => 'error',
+                'message' => 'Terlalu banyak percobaan login. Silakan coba lagi dalam beberapa detik.'
+            ], 429);
         }
 
         $request->validate([
@@ -42,15 +43,21 @@ class AuthController extends Controller
             RateLimiter::clear($key); // Reset hitung login jika sukses
 
             $request->session()->regenerate(); // Regenerate session ID (cegah session fixation)
+                return response()->json([
+                'status' => 'success',
+                'message' => 'The username and password is correct',
+                'redirect' => url('/dashboard')
+            ]);
 
-            return redirect('/dashboard'); // arahkan ke halaman setelah login
+            // return redirect('/dashboard')->with('success', 'The username and password is correct'); // arahkan ke halaman setelah login
         }
 
         RateLimiter::hit($key, 60); // Tambah hitungan, reset dalam 60 detik
 
-        throw ValidationException::withMessages([
-            'username' => ['Username atau password salah.'],
-        ]);
+        return response()->json([
+        'status' => 'error',
+        'message' => 'The username and password your entered is incorrect'
+    ], 401);
     }
 
     public function logout(Request $request)

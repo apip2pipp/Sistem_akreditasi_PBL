@@ -26,6 +26,7 @@ module.exports = {
                 'ijologin':'#67AE6E',
                 'bglogin' : '#90C67C',
                 'ijologinfont' : '#034833',
+                'ijolanding' : '#4E823B',
                 "light-accent": "#8ABD5F",
             },
         },

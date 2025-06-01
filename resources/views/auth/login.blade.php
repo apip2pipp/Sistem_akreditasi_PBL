@@ -50,51 +50,113 @@
                 </p>
             </div>
 
-            <form method="POST" action="{{ route('login') }}" class="space-y-4">
+            <!-- Unsuccess Notification -->
+            {{-- @if($errors->any())
+            <div id="error-notification" class="mb-4 px-3 py-2 bg-red-100 border border-red-300 rounded-lg">
+                <div class="flex items-center">
+                    <svg class="w-4 h-4 text-red-600 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+                    </svg>
+                    <span class="text-sm text-red-700 font-medium">
+                        The username or password you entered is incorrect
+                    </span>
+                </div>
+            </div>
+            @endif --}}
+
+            <form id="login-form" class="space-y-6">
                 @csrf
 
-                <!-- Login Form -->
-                <form class="space-y-4">
-                    <!-- Input Username -->
-                    <div>
-                        <input type="text" name="username" id="username"
-                            class="w-full px-4 py-2.5 rounded-xl border-black shadow-md bg-green-100 focus:outline-none focus:ring-2 focus:ring-green-500"
-                            placeholder="username" required>
-                    </div>
+                <div>
+                    <input type="text" name="username" id="username"
+                        class="w-full px-4 py-3 rounded-md bg-green-100 focus:outline-none focus:ring-2 focus:ring-green-500"
+                        placeholder="Username" required>
+                </div>
 
-                    <!-- Input Password -->
-                    <div class="mb-6">
-                        <input type="password" name="password" id="password"
-                            class="w-full px-4 py-2.5 rounded-xl border-black shadow-md bg-green-100 focus:outline-none focus:ring-2 focus:ring-green-500"
-                            placeholder="Password" required>
-                    </div>
+                <div>
+                    <input type="password" name="password" id="password"
+                        class="w-full px-4 py-3 rounded-md bg-green-100 focus:outline-none focus:ring-2 focus:ring-green-500"
+                        placeholder="Password" required>
+                </div>
 
-                    <!-- Space between password and buttons -->
-                    <div class="pt-2"></div>
+                <div>
+                    <button type="submit"
+                        class="w-full py-3 rounded-md bg-ijobg text-white font-medium hover:bg-green-700 transition duration-200">
+                        Login
+                    </button>
+                </div>
 
-                    <!-- Tombol Login -->
-                    <div class="mt-4">
-                        <button type="submit"
-                            class="w-full px-4 py-2.5 rounded-xl shadow-md bg-ijobg text-white font-medium text-center hover:bg-green-700 transition duration-200">
-                            Login
-                        </button>
-                    </div>
-
-                    <div>
-                        <a href="{{ route('home') }}">
-                            <button type="button"
-                                class="w-full px-4 py-2.5 rounded-xl shadow-md bg-ijobg text-white font-medium text-center hover:bg-green-700 transition duration-200">
-                                Back To Home page
-                            </button>
-                        </a>
-                    </div>
-                </form>
+                <div>
+                    <a href="{{ route('home') }}"
+                        class="block w-full py-3 rounded-md bg-ijobg text-white font-medium hover:bg-green-700 transition duration-200 text-center">
+                        Back To Home page
+                    </a>
+                </div>
+            </form>
 
                 <div class="mt-10 text-center text-gray-500" style="font-size: 12px;">
                     &copy; Copyright 2025 | The Accreditation Program
                 </div>
         </div>
     </div>
-</body>
 
+
+    {{-- script --}}
+    <script>
+        document.getElementById('login-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const form = e.target;
+            const formData = new FormData(form);
+            const token = document.querySelector('input[name="_token"]').value;
+
+            // Hapus feedback lama jika ada
+            document.getElementById('feedback')?.remove();
+
+            const response = await fetch("{{ route('login') }}", {
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': token,
+                    'Accept': 'application/json'
+                },
+                body: formData
+            });
+
+            const data = await response.json();
+
+            const feedback = document.createElement('div');
+            feedback.id = 'feedback';
+            feedback.className = 'mt-4 px-4 py-3 rounded text-sm flex items-center gap-2 border';
+
+            if (data.status === 'success') {
+                feedback.classList.add('bg-green-100', 'text-green-700', 'border-green-400');
+                feedback.innerHTML = `
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 text-green-700" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.707a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                    </svg>
+                    <span>${data.message}</span>
+                `;
+
+                form.before(feedback);
+
+                setTimeout(() => {
+                    window.location.href = data.redirect;
+                }, 2000);
+            } else {
+                feedback.classList.add('bg-red-100', 'text-red-700', 'border-red-400');
+            feedback.innerHTML = `
+                <div class="flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10" viewBox="0 0 24 24" fill="none">
+                        <circle cx="12" cy="12" r="10" fill="#DC2626"/>
+                        <rect x="11" y="6" width="2" height="8" rx="1" fill="white"/>
+                        <circle cx="12" cy="17" r="1.25" fill="white"/>
+                    </svg>
+                    <span>${data.message}</span>
+                </div>
+            `;
+                form.before(feedback);
+            }
+        });
+    </script>
+</body>
 </html>

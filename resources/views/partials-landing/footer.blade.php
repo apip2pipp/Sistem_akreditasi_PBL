@@ -3,9 +3,7 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div>
                 <div class="flex items-center mb-6">
-                    <svg class="h-10 w-10 text-accent mr-2" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
-                    </svg>
+                     <img src="{{ asset('img/AKREDITASI.LOGO.png') }}" alt="Students" class="rounded-lg">
                     <span class="font-bold text-2xl">ACREDITATION</span>
                 </div>
 
@@ -83,9 +81,9 @@
         </div>
     </div>
 
-    <div class="bg-ijobg border-t border-gray-700">
+    <div class="bg-ijobg border-t border-gray-300">
         <div class="container mx-auto px-4 py-4 flex flex-col md:flex-row justify-between items-center text-sm">
-            <p>© Copyright 2023 | The Accreditation Program</p>
+            <p>© Copyright 2025 | The Accreditation Program</p>
             <div class="flex space-x-6 mt-4 md:mt-0">
                 <a href="#" class="hover:text-accent">Terms & Condition</a>
                 <a href="#" class="hover:text-accent">Privacy Policy</a>

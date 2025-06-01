@@ -95,7 +95,8 @@
                     <ul class="nav nav-treeview">
                         @foreach ($listKriteria as $kriteria)
                             <li class="nav-item">
-                                <a href="{{ url($kriteria->url) }}" class="nav-link">
+                                <a href="{{ route('akreditasi.index', ['slug' => $kriteria->route]) }}"
+                                    class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>{{ $kriteria->nama_kriteria }}</p>
                                 </a>
@@ -104,57 +105,45 @@
                     </ul>
                 </li>
             @endif --}}
-            {{-- @if (auth()->user()->level->level_kode === 'ADM') --}}
-
-<li class="nav-header">Settings User</li>
+            {{-- manage Users --}}
+            <li class="nav-header">Settings User</li>
             <li class="nav-item">
-                <a href="pages/gallery.html" class="nav-link">
-                    <i class="nav-icon far fa-image"></i>
-                    <p>
-                        Manage User
-                    </p>
+                <a href="{{ route('user.index') }}" class="nav-link {{ Request::routeIs('user*') ? 'active' : '' }}">
+                    <i class="nav-icon fas fa-users"></i>
+                    <p>User</p>
                 </a>
             </li>
-
-            </li>
+            
             <li class="nav-item">
-                <a href="pages/gallery.html" class="nav-link">
-                    <i class="nav-icon far fa-image"></i>
-                    <p>
-                        Manage Level
-                    </p>
+                <a href="{{ route('level.index') }}"
+                    class="nav-link {{ Request::routeis('level*') ? 'active' : '' }}">
+                    <i class="nav-icon far fa-plus-square"></i>
+                    <p>Level</p>
                 </a>
             </li>
-
+            @if (auth()->user()->level->level_kode === 'ADM')
                 <li
-                    class="nav-item {{ Request::routeIs('user*') || Request::routeIs('level*') || Request::routeIs('dosen*') || Request::routeIs('kaprodi*') || Request::routeIs('koordinator*') || Request::routeIs('kjm*') || Request::routeIs('direktur-utama*') || Request::routeIs('ketua-jurusan*') ? 'menu-open' : '' }}">
+                    class="nav-item {{ Request::routeIs('dosen*') || Request::routeIs('kaprodi*') || Request::routeIs('koordinator*') || Request::routeIs('kjm*') || Request::routeIs('direktur-utama*') || Request::routeIs('ketua-jurusan*') ? 'menu-open' : '' }}">
                     <a href="#"
-                        class="nav-link {{ Request::routeIs('user*') || Request::routeIs('level*') || Request::routeIs('dosen*') || Request::routeIs('kaprodi*') || Request::routeIs('koordinator*') || Request::routeIs('kjm*') || Request::routeIs('direktur-utama*') || Request::routeIs('ketua-jurusan*') ? 'active' : '' }}"
+                        class="nav-link {{ Request::routeIs('dosen*') || Request::routeIs('kaprodi*') || Request::routeIs('koordinator*') || Request::routeIs('kjm*') || Request::routeIs('direktur-utama*') || Request::routeIs('ketua-jurusan*') ? 'active' : '' }}"
                         id="managementUsersLink">
-                        <i class="nav-icon fas fa-users"></i>
+                        <i class="nav-icon fas fa-ellipsis-h"></i>
                         <p>
-                            Academic Structure
+                            Academic Stucture
                             <i class="fas fa-angle-left right"></i>
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{ route('level.index') }}"
-                                class="nav-link {{ Request::is('level*') ? 'active' : '' }}">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Role</p>
-                            </a>
-                        </li>
-                        {{-- <li class="nav-item">
                             <a href="{{ route('direktur-utama.index') }}"
-                                class="nav-link {{ Request::is('direktur-utama*') ? 'active' : '' }}">
+                                class="nav-link {{ Request::routeIs('direktur-utama*') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Direktur Utama</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('kjm.index') }}"
-                                class="nav-link {{ Request::is('kjm*') ? 'active' : '' }}">
+                                class="nav-link {{ Request::routeIs('kjm*') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>KJM</p>
                             </a>
@@ -186,28 +175,37 @@
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>koordinator</p>
                             </a>
-                        </li> --}}
-                        <li class="nav-item">
-                            <a href="{{ route('user.index') }}"
-                                class="nav-link {{ Request::routeIs('user*') ? 'active' : '' }}">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>User</p>
-                            </a>
                         </li>
                     </ul>
                 </li>
+            @endif
 
-                <li class="nav-header">Add Criteria</li>
-                <li class="nav-item">
-                <a href="pages/gallery.html" class="nav-link">
-                    <i class="nav-icon far fa-image"></i>
+            <li class="nav-header">Add Criteria</li>
+
+            {{-- manage criteria --}}
+            <li class="nav-item">
+                {{-- <a href="{{ route('kriteria.index') }}"
+                    class="nav-link {{ Request::routeIs('kriteria.index') ? 'active' : '' }}"> --}}
+                    <i class="nav-icon fas fa-book"></i>
                     <p>
-                        Manage Criteria
+                        Managae Criteria
                     </p>
-                </a>
+                {{-- </a> --}}
             </li>
 
-            {{-- @endif --}}
+            <li class="nav-header">Setting Crriteria</li>
+
+            {{-- premission criteria --}}
+
+            <li class="nav-item">
+                {{-- <a href="{{ route('permission-kriteria.index') }}"
+                    class="nav-link {{ Request::routeIs('permission-kriteria.index') ? 'active' : '' }}"> --}}
+                    <i class="nav-icon fas fa-columns"></i>
+                    <p>
+                        Permission Kriteria
+                    </p>
+                {{-- </a> --}}
+            </li>
 
             {{-- <li class="nav-item">
                 <a href="{{ route('permission-kriteria.index') }}"
@@ -218,6 +216,29 @@
                     </p>
                 </a>
             </li> --}}
+            {{-- @if (auth()->user()->level->level_kode === 'DSN')
+                <li class="nav-item">
+                    <a href="{{ route('penelitian-dosen.index') }}"
+                        class="nav-link {{ Request::routeIs('penelitian-dosen.index') ? 'active' : '' }}">
+                        <i class="nav-icon far fa-image"></i>
+                        <p>
+                            Penelitian
+                        </p>
+                    </a>
+                </li>
+            @endif
+            @if (auth()->user()->level->level_kode !== 'DSN')
+                <li class="nav-item">
+                    <a href="{{ route('penelitian-dosen-koordinator.index') }}"
+                        class="nav-link {{ Request::routeIs('penelitian-dosen-koordinator.index') ? 'active' : '' }}">
+                        <i class="nav-icon far fa-image"></i>
+                        <p>
+                            Penelitian
+                        </p>
+                    </a>
+                </li>
+            @endif --}}
+
             <li class="nav-item">
                 <a href="pages/widgets.html" class="nav-link">
                     <i class="nav-icon fas fa-th"></i>
