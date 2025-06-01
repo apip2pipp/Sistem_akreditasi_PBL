@@ -11,6 +11,8 @@ use App\Http\Controllers\MKajurController;
 use App\Http\Controllers\MKaprodiController;
 use App\Http\Controllers\MKjmController;
 use App\Http\Controllers\MKoordinatorController;
+use App\Http\Controllers\MKriteriaController;
+use App\Http\Controllers\TPermissionKriteriaUserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -117,4 +119,16 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard
         Route::post('ketua-jurusan/list/data', [MKajurController::class, 'list'])->name('kajur.list');
         Route::get('ketua-jurusan/{id}/delete', [MKajurController::class, 'confirm']);
     });
+
+
+    Route::resource('kriteria', MKriteriaController::class);
+    Route::post('kriteria/list/data', [MKriteriaController::class, 'list'])->name('kriteria.list');
+    Route::get('kriteria/{id}/delete', [MKriteriaController::class, 'confirm']);
+
+    //permission
+    Route::get('permission-kriteria', [TPermissionKriteriaUserController::class, 'index'])->name('permission-kriteria.index');
+    Route::post('permission-kriteria/list', [TPermissionKriteriaUserController::class, 'list'])->name('permission-kriteria.list');
+    Route::get('permission-kriteria/give-permissions/{id}', [TPermissionKriteriaUserController::class, 'edit'])->name('permission-kriteria.edit');
+    Route::put('/permission-kriteria/{id}', [TPermissionKriteriaUserController::class, 'update'])->name('permission-kriteria.update');
+
 });
