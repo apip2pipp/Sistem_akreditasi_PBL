@@ -151,51 +151,125 @@
                         </div>
                     </div>
 
-                <div class="text-center">
-                    <a href="#" class="read-more">
-                        Read More
-                        <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-                        </svg>
-                    </a>
+                <div class="lg:col-span-7">
+                    <h2 class="text-3xl font-bold text-primary mb-4">What is the meaning of Kriteria?</h2>
+                    <p class="text-gray-600 mb-8">These criteria contain explanations that include setting, implementing,
+                        evaluating, controlling, and improvement of Higher Education Standards related to the vision,
+                        mission, goals, and strategies for achieving goals (VMTS) of LPPIS.</p>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                        <!-- Vision -->
+                        <div class="bg-white p-6 rounded-lg shadow-md">
+                            <div class="flex items-center mb-4">
+
+                                <img src="img\Vision.png" class="">
+
+                                <h3 class="text-xl font-semibold p-4 text-green-800">Vision</h3>
+                            </div>
+
+                            <ul class="space-y-2">
+                                <li class="flex items-center">
+                                    <i class="fas fa-check text-primary mr-2"></i>
+                                    <span>Becoming a Leading Study Program</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fas fa-check text-primary mr-2"></i>
+                                    <span>Sieres Information System</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fas fa-check text-primary mr-2"></i>
+                                    <span>Both at the National Level</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fas fa-check text-primary mr-2"></i>
+                                    <span>Also International Level</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- Mission -->
+                        <div class="bg-white p-6 rounded-lg shadow-md">
+                            <div class="flex items-center mb-4">
+
+                                <img src="img\Mission.png" class="">
+
+                                <h3 class="text-xl font-semibold p-4 text-green-800">Mission</h3>
+                            </div>
+
+                            <ul class="space-y-2">
+                                <li class="flex items-center">
+                                    <i class="fas fa-check text-primary mr-2"></i>
+                                    <span>Implement innovative vocational education</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fas fa-check text-primary mr-2"></i>
+                                    <span>Develop research</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fas fa-check text-primary mr-2"></i>
+                                    <span>Carry out community service</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fas fa-check text-primary mr-2"></i>
+                                    <span>Realizing mutually beneficial cooperation</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="text-center">
+                        <a href="https://siakad.polinema.ac.id/login/index/err/6" target="_blank"
+                            class="read-more bg-ijolanding text-white px-4 py-2 rounded inline-flex items-center hover:bg-ijobg">
+                            Read More
+                            <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                            </svg>
+                        </a>
+
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- CTA Section -->
-<section class="py-12 bg-ijobg">
-    <div class="container mx-auto px-4">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div class="bg-opacity-10 bg-white p-6 rounded-lg flex items-center">
-                <div class="mr-6">
-                    
-                       <img src="img\bumi.png"
-                    class="w-20 h-20">
-                    
-                </div>
-                <div>
-                    <h3 class="text-xl font-semibold text-white mb-2">Need Any Support For Program Accreditation?</h3>
-                    <p class="text-gray-200 mb-4">We provide professional assistance to help your program meet accreditation standards.</p>
-                    <a href="#" class="inline-block bg-white text-primary font-medium py-2 px-4 rounded-md hover:bg-gray-100">Contact Us Now</a>
-                </div>
-            </div>
+    <!-- CTA Section -->
+    <section class="py-12 bg-ijobg">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-opacity-10 bg-white p-6 rounded-lg flex items-center">
+                    <div class="mr-6">
 
-            <div class="bg-opacity-10 bg-white p-6 rounded-lg flex items-center">
-                <div class="mr-6">
-                    <img src="img\uang.png"
-                    class="w-20 h-20">
+                        <img src="{{ asset('img/bumi.png') }}" class="w-24 h-20">
+
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold text-white mb-2">Need Any Support For Program Accreditation?</h3>
+                        <p class="text-gray-200 mb-4">We provide professional assistance to help your program meet
+                            accreditation standards.</p>
+                        <a href="https://www.instagram.com/apip.pipp/" target="_blank"
+                            class="inline-block bg-white text-primary font-medium py-2 px-4 rounded-md hover:bg-gray-100">Contact
+                            Us Now</a>
+                    </div>
                 </div>
-                <div>
-                    <h3 class="text-xl font-semibold text-white mb-2">Are You Ready To Enhance Your Study Program Quality?</h3>
-                    <p class="text-gray-200 mb-4">Get a free consultation on how to improve your study program's quality.</p>
-                    <a href="#" class="inline-block bg-white text-primary font-medium py-2 px-4 rounded-md hover:bg-gray-100">Get Started</a>
+
+                <div class="bg-opacity-10 bg-white p-6 rounded-lg flex items-center">
+                    <div class="mr-6">
+                        <img src="img\uang.png" class="w-20 h-20">
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold text-white mb-2">Are You Ready To Enhance Your Study Program
+                            Quality?</h3>
+                        <p class="text-gray-200 mb-4">Get a free consultation on how to improve your study program's
+                            quality.</p>
+                        <a href="https://www.instagram.com/apip.pipp/" target="_blank"
+                            class="inline-block bg-white text-primary font-medium py-2 px-4 rounded-md hover:bg-gray-100">Get
+                            Started</a>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 @endsection
 
 <script>
