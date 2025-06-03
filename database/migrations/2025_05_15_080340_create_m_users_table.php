@@ -13,15 +13,14 @@ return new class extends Migration
     {
         Schema::create('m_users', function (Blueprint $table) {
             $table->id('user_id');
-            $table->unsignedBigInteger('level_id')->index();
             $table->string('username', 100)->unique();
             $table->string('email', 100)->unique();
             $table->string('name', 100);
+            $table->string('NIDN', 100)->nullable();
             $table->string('password');
-            $table->timestamps();
-
-            //relasi
+            $table->unsignedBigInteger('level_id')->index();
             $table->foreign('level_id')->references('level_id')->on('m_levels');
+            $table->timestamps();
         });
     }
 
