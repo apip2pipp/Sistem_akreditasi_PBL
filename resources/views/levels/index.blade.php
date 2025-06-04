@@ -73,13 +73,13 @@
                         searchable: false,
                         render: function(data, type, row, meta) {
                             let html = `
-                                <a href="javascript:void(0)" 
+                                <a href="javascript:void(0)"
                                     class="btn btn-xs btn-warning text-white"
                                     onclick="modalAction('{{ url('management-users/level') }}/${data}/edit')"
                                     title="Edit Data">
                                     <i class="fa fa-edit"></i>
-                                </a> 
-                                <a href="javascript:void(0)" 
+                                </a>
+                                <a href="javascript:void(0)"
                                     class="btn btn-xs btn-danger text-white"
                                     onclick="modalAction('{{ url('management-users/level') }}/${data}/delete')"
                                     title="Hapus Data">
