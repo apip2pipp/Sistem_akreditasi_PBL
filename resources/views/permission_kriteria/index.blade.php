@@ -6,7 +6,7 @@
             <div class="card-header">
                 <h3 class="card-title mt-1">
                     <i class="fas fa-angle-double-right text-md text-primary mr-1"></i>
-                    Daftar Permission Koordinator
+                    Permission Coordinator List
                 </h3>
                 {{-- Tidak ada tombol tambah karena ini cuma list permission --}}
             </div>
@@ -16,9 +16,9 @@
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Koordinator</th>
+                                <th>Coordinator</th>
                                 <th>Hak Permission (Kriteria)</th>
-                                <th>Aksi</th>
+                                <th>Action</th>
                                 {{-- Kalau mau tombol aksi, bisa ditambah di sini --}}
                             </tr>
                         </thead>

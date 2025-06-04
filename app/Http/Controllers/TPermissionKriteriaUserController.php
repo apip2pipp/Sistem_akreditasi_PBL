@@ -42,12 +42,12 @@ class TPermissionKriteriaUserController extends Controller
     public function index()
     {
         $breadcrumb = (object)[
-            'title' => 'Daftar Permission Kriteria',
+            'title' => 'Permission List Criteria',
             'list' => ['Home', 'Permission Kriteria',]
         ];
 
         $page = (object)[
-            'title' => 'Daftar Permission Kriteria'
+            'title' => 'Permission List Criteria'
         ];
         return view('permission_kriteria.index', compact('breadcrumb', 'page'));
     }
@@ -100,7 +100,7 @@ class TPermissionKriteriaUserController extends Controller
             }
 
             DB::commit();
-            return response()->json(['message' => 'Permission berhasil diperbarui.']);
+            return response()->json(['message' => 'Permission successfully updated']);
         } catch (\Exception $e) {
             DB::rollBack();
             return response()->json(['error' => $e->getMessage()], Response::HTTP_INTERNAL_SERVER_ERROR);

@@ -4,7 +4,7 @@
     <div id="modal-master" class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 id="exampleModalLabel" class="modal-title">Tambah Data Level</h5>
+                <h5 id="exampleModalLabel" class="modal-title">Add Level Data</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -12,7 +12,7 @@
 
             <div class="modal-body">
                 <div class="form-group row">
-                    <label class="col-1 control-label col-form-label">Kode Level</label>
+                    <label class="col-1 control-label col-form-label">Level Code</label>
                     <div class="col-11">
                         <input type="text" class="form-control" id="level_kode" name="level_kode"
                             value="{{ old('level_kode') }}" required>
@@ -24,7 +24,7 @@
                 </div>
 
                 <div class="form-group row">
-                    <label class="col-1 control-label col-form-label">Nama Level</label>
+                    <label class="col-1 control-label col-form-label">Level Name</label>
                     <div class="col-11">
                         <input type="text" class="form-control" id="level_nama" name="level_nama"
                             value="{{ old('level_nama') }}" required>
@@ -37,8 +37,8 @@
             </div>
 
             <div class="modal-footer">
-                <button type="button" data-dismiss="modal" class="btn btn-warning">Batal</button>
-                <button type="submit" class="btn btn-primary">Simpan</button>
+                <button type="button" data-dismiss="modal" class="btn btn-warning">Cancel</button>
+                <button type="submit" class="btn btn-primary">Save</button>
             </div>
         </div>
     </div>
@@ -70,7 +70,7 @@
 
                             Swal.fire({
                                 icon: 'success',
-                                title: 'Berhasil',
+                                title: 'Success',
                                 text: res.message
                             });
 
@@ -80,9 +80,9 @@
                     error: function(xhr, status, error) {
                         Swal.fire({
                             icon: 'error',
-                            title: 'Terjadi Kesalahan',
+                            title: 'Error Occurring',
                             text: xhr.responseJSON ? xhr.responseJSON.message :
-                                'Terjadi kesalahan!'
+                                'Error Occurring!'
                         });
 
                         if (xhr.responseJSON && xhr.responseJSON.msgField) {
