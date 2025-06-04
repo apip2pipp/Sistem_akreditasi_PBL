@@ -30,14 +30,26 @@ class mUser extends Authenticatable
         return 'username'; // Agar Auth tahu login pakai kolom username
     }
 
+    public function permissions()
+    {
+        return $this->hasMany(tPermissionKriteriaUser::class, 'user_id');
+    }
+
     public function level()
     {
         return $this->belongsTo(mLevel::class, 'level_id');
     }
 
+    // Relasi ke dosen
     public function dosen()
     {
         return $this->hasOne(mDosen::class, 'user_id', 'user_id');
+    }
+
+    // Relasi ke Kaprodi
+    public function kaprodi()
+    {
+        return $this->hasOne(mKaprodi::class, 'user_id', 'user_id');
     }
 
     // Relasi ke kajur
@@ -63,5 +75,4 @@ class mUser extends Authenticatable
     {
         return $this->hasOne(mKoordinator::class, 'user_id', 'user_id');
     }
-
 }

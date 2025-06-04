@@ -6,12 +6,9 @@
             <div class="card-header">
                 <h3 class="card-title mt-1">
                     <i class="fas fa-angle-double-right text-md text-primary mr-1"></i>
-                    {{ $page->title }}
+                    Daftar Permission Koordinator
                 </h3>
-                <div class="card-tools">
-                    <button onclick="modalAction('{{ url('management-users/level/create') }}')"
-                        class="btn btn-sm btn-success mt-1">Tambah</button>
-                </div>
+                {{-- Tidak ada tombol tambah karena ini cuma list permission --}}
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -19,9 +16,10 @@
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Kode Level</th>
-                                <th>Nama Level</th>
-                                <th>#</th>
+                                <th>Koordinator</th>
+                                <th>Hak Permission (Kriteria)</th>
+                                <th>Aksi</th>
+                                {{-- Kalau mau tombol aksi, bisa ditambah di sini --}}
                             </tr>
                         </thead>
                     </table>
@@ -30,8 +28,11 @@
         </div>
     </div>
 @endsection
+
 @push('css')
+    {{-- Tambahkan CSS khusus kalau perlu --}}
 @endpush
+
 @push('js')
     <script>
         function modalAction(url) {
@@ -45,7 +46,7 @@
                 processing: true,
                 serverSide: true,
                 ajax: {
-                    url: "{{ url('management-users/level/list') }}",
+                    url: "{{ route('permission-kriteria.list') }}",
                     type: "POST",
                     dataType: "json",
                     headers: {
@@ -56,36 +57,29 @@
                         data: 'DT_RowIndex',
                         className: 'text-center',
                         orderable: false,
-                        searchable: false,
+                        searchable: false
                     },
                     {
-                        data: 'level_kode',
-                        className: '',
+                        data: 'koordinator_nama',
+                        className: ''
                     },
                     {
-                        data: 'level_nama',
-                        className: '',
+                        data: 'hak_permission',
+                        className: ''
                     },
                     {
-                        data: 'level_id',
-                        className: '',
+                        data: 'koordinator_id',
+                        className: 'text-center',
                         orderable: false,
                         searchable: false,
                         render: function(data, type, row, meta) {
-                            let html = `
-                                <a href="javascript:void(0)"
+                            return `
+                            <a href="javascript:void(0)" 
                                     class="btn btn-xs btn-warning text-white"
-                                    onclick="modalAction('{{ url('management-users/level') }}/${data}/edit')"
+                                    onclick="modalAction('{{ url('permission-kriteria/give-permissions/') }}/${data}')"
                                     title="Edit Data">
                                     <i class="fa fa-edit"></i>
-                                </a>
-                                <a href="javascript:void(0)"
-                                    class="btn btn-xs btn-danger text-white"
-                                    onclick="modalAction('{{ url('management-users/level') }}/${data}/delete')"
-                                    title="Hapus Data">
-                                    <i class="fa fa-trash"></i>
                                 </a>`;
-                            return html;
                         }
                     }
                 ],
@@ -94,7 +88,7 @@
                 }
             });
 
-            // custom search: tekan Enter
+            // Tekan enter untuk search
             $('.dataTables_filter input').unbind().bind('keyup', function(e) {
                 if (e.keyCode === 13) {
                     dataMaster.search(this.value).draw();

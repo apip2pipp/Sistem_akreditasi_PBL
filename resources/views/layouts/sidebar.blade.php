@@ -24,8 +24,8 @@
         $listKriteria = DB::table('m_kriterias')->get();
         $showKriteria = true;
     }
-@endphp --}}
-
+@endphp
+ --}}
 
 <div class="sidebar">
     <!-- Sidebar user panel (optional) -->
@@ -73,39 +73,7 @@
                     </li>
                 </ul>
             </li>
-            {{-- <li class="nav-item">
-                <a href="{{ route('kriteria.index') }}"
-                    class="nav-link {{ Request::routeIs('kriteria.index') ? 'active' : '' }}">
-                    <i class="nav-icon far fa-image"></i>
-                    <p>
-                        Kriteria
-                    </p>
-                </a>
-            </li> --}}
-            {{-- @if ($listKriteria->isNotEmpty())
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-layer-group"></i>
-                        <p>
-                            Kriteria
-                            <i class="fas fa-angle-left right"></i>
-                            <span class="badge badge-info right">{{ $listKriteria->count() }}</span>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        @foreach ($listKriteria as $kriteria)
-                            <li class="nav-item">
-                                <a href="{{ route('akreditasi.index', ['slug' => $kriteria->route]) }}"
-                                    class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>{{ $kriteria->nama_kriteria }}</p>
-                                </a>
-                            </li>
-                        @endforeach
-                    </ul>
-                </li>
-            @endif --}}
-            {{-- manage Users --}}
+
             <li class="nav-header">Settings User</li>
             <li class="nav-item">
                 <a href="{{ route('user.index') }}" class="nav-link {{ Request::routeIs('user*') ? 'active' : '' }}">
@@ -113,12 +81,11 @@
                     <p>User</p>
                 </a>
             </li>
-            
             <li class="nav-item">
                 <a href="{{ route('level.index') }}"
                     class="nav-link {{ Request::routeis('level*') ? 'active' : '' }}">
                     <i class="nav-icon far fa-plus-square"></i>
-                    <p>Level</p>
+                    <p>Role</p>
                 </a>
             </li>
             @if (auth()->user()->level->level_kode === 'ADM')
@@ -180,42 +147,55 @@
                 </li>
             @endif
 
-            <li class="nav-header">Add Criteria</li>
 
-            {{-- manage criteria --}}
+            <li class="nav-header">Add Criteria</li>
             <li class="nav-item">
-                {{-- <a href="{{ route('kriteria.index') }}"
-                    class="nav-link {{ Request::routeIs('kriteria.index') ? 'active' : '' }}"> --}}
+                <a href="{{ route('kriteria.index') }}"
+                    class="nav-link {{ Request::routeIs('kriteria.index') ? 'active' : '' }}">
                     <i class="nav-icon fas fa-book"></i>
                     <p>
                         Managae Criteria
                     </p>
-                {{-- </a> --}}
+                </a>
             </li>
 
+
             <li class="nav-header">Setting Crriteria</li>
-
-            {{-- premission criteria --}}
-
             <li class="nav-item">
-                {{-- <a href="{{ route('permission-kriteria.index') }}"
-                    class="nav-link {{ Request::routeIs('permission-kriteria.index') ? 'active' : '' }}"> --}}
+                <a href="{{ route('permission-kriteria.index') }}"
+                    class="nav-link {{ Request::routeIs('permission-kriteria.index') ? 'active' : '' }}">
                     <i class="nav-icon fas fa-columns"></i>
                     <p>
                         Permission Kriteria
                     </p>
-                {{-- </a> --}}
+                </a>
             </li>
 
-            {{-- <li class="nav-item">
-                <a href="{{ route('permission-kriteria.index') }}"
-                    class="nav-link {{ Request::routeIs('permission-kriteria.index') ? 'active' : '' }}">
-                    <i class="nav-icon far fa-image"></i>
-                    <p>
-                        Permission Kriteria
-                    </p>
-                </a>
-            </li> --}}
+             {{-- @if ($listKriteria->isNotEmpty())
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-layer-group"></i>
+                        <p>
+                            Kriteria
+                            <i class="fas fa-angle-left right"></i>
+                            <span class="badge badge-info right">{{ $listKriteria->count() }}</span>
+                        </p>
+                    </a> --}}
+                    {{-- <ul class="nav nav-treeview">
+                        @foreach ($listKriteria as $kriteria)
+                            <li class="nav-item">
+                                <a href="{{ route('akreditasi.index', ['slug' => $kriteria->route]) }}"
+                                    class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>{{ $kriteria->nama_kriteria }}</p>
+                                </a>
+                            </li>
+                        @endforeach
+                    </ul> --}}
+                {{-- </li> --}}
+                {{-- manage Users --}}
+            {{-- @endif --}}
+
             {{-- @if (auth()->user()->level->level_kode === 'DSN')
                 <li class="nav-item">
                     <a href="{{ route('penelitian-dosen.index') }}"
@@ -226,8 +206,8 @@
                         </p>
                     </a>
                 </li>
-            @endif
-            @if (auth()->user()->level->level_kode !== 'DSN')
+            @endif --}}
+            {{-- @if (auth()->user()->level->level_kode !== 'DSN')
                 <li class="nav-item">
                     <a href="{{ route('penelitian-dosen-koordinator.index') }}"
                         class="nav-link {{ Request::routeIs('penelitian-dosen-koordinator.index') ? 'active' : '' }}">
