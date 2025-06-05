@@ -5,7 +5,7 @@
     <div id="modal-master" class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Edit Data Kriteria</h5>
+                <h5 class="modal-title">Edit Criteria Data</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -14,7 +14,7 @@
             <div class="modal-body">
                 {{-- Nama Kriteria --}}
                 <div class="form-group row">
-                    <label class="col-2 control-label col-form-label">Nama Kriteria</label>
+                    <label class="col-2 control-label col-form-label">Name Criteria</label>
                     <div class="col-10">
                         <input type="text" class="form-control" name="nama_kriteria"
                             value="{{ $mKriteria->nama_kriteria }}" required>
@@ -33,8 +33,8 @@
             </div>
 
             <div class="modal-footer">
-                <button type="button" data-dismiss="modal" class="btn btn-warning">Batal</button>
-                <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                <button type="button" data-dismiss="modal" class="btn btn-warning">Cancel</button>
+                <button type="submit" class="btn btn-primary">Save Changes</button>
             </div>
         </div>
     </div>
@@ -61,7 +61,7 @@
                         $('#myModal').modal('hide');
                         Swal.fire({
                             icon: 'success',
-                            title: 'Berhasil',
+                            title: 'Succes',
                             text: res.message
                         });
                         dataMaster.ajax.reload();
@@ -69,9 +69,9 @@
                     error: function(xhr) {
                         Swal.fire({
                             icon: 'error',
-                            title: 'Terjadi Kesalahan',
+                            title: 'An error has occurred',
                             text: xhr.responseJSON ? xhr.responseJSON.message :
-                                'Terjadi kesalahan!'
+                                'An error has occurred!'
                         });
 
                         if (xhr.responseJSON && xhr.responseJSON.msgField) {
