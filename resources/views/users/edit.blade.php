@@ -5,7 +5,7 @@
     <div id="modal-master" class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Edit Data Pengguna</h5>
+                <h5 class="modal-title">Edit User Data</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -32,9 +32,9 @@
                     </div>
                 </div>
 
-                {{-- Nama --}}
+                {{-- Name --}}
                 <div class="form-group row">
-                    <label class="col-2 control-label col-form-label">Nama</label>
+                    <label class="col-2 control-label col-form-label">Name</label>
                     <div class="col-10">
                         <input type="text" class="form-control" name="name"
                             value="{{ old('name', $mUser->name) }}" required>
@@ -61,7 +61,7 @@
 
                 {{-- Password Baru (Opsional) --}}
                 <div class="form-group row">
-                    <label class="col-2 control-label col-form-label">Password Baru</label>
+                    <label class="col-2 control-label col-form-label">New Password</label>
                     <div class="col-10">
                         <input type="password" class="form-control" name="password"
                             placeholder="Kosongkan jika tidak ingin diubah">
@@ -71,7 +71,7 @@
 
                 {{-- Konfirmasi Password --}}
                 <div class="form-group row">
-                    <label class="col-2 control-label col-form-label">Konfirmasi Password</label>
+                    <label class="col-2 control-label col-form-label">Confirmation Password</label>
                     <div class="col-10">
                         <input type="password" class="form-control" name="password_confirmation"
                             placeholder="Ulangi password baru">
@@ -80,8 +80,8 @@
             </div>
 
             <div class="modal-footer">
-                <button type="button" data-dismiss="modal" class="btn btn-warning">Batal</button>
-                <button type="submit" class="btn btn-primary">Simpan</button>
+                <button type="button" data-dismiss="modal" class="btn btn-warning">Cancel</button>
+                <button type="submit" class="btn btn-primary">Save</button>
             </div>
         </div>
     </div>
