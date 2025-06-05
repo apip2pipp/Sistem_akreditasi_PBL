@@ -17,7 +17,7 @@
                             <tr>
                                 <th>No</th>
                                 <th>Coordinator</th>
-                                <th>Hak Permission (Kriteria)</th>
+                                <th>Access Permission (Criteria)</th>
                                 <th>Action</th>
                                 {{-- Kalau mau tombol aksi, bisa ditambah di sini --}}
                             </tr>
