@@ -39,12 +39,12 @@
 
                     <table class="table table-sm table-bordered table-striped">
                         <tr>
-                            <th class="text-right col-3">Kode Level</th>
+                            <th class="text-right col-3">Level Code</th>
                             <td class="col-9">{{ $mLevel->level_kode }}</td>
                         </tr>
 
                         <tr>
-                            <th class="text-right col-3">Nama Level</th>
+                            <th class="text-right col-3">Level Name</th>
                             <td class="col-9">{{ $mLevel->level_nama }}</td>
                         </tr>
                     </table>
