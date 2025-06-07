@@ -5,7 +5,7 @@
     <div id="modal-master" class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 id="exampleModalLabel" class="modal-title">Edit Level Data</h5>
+                <h5 id="exampleModalLabel" class="modal-title">Edit List Level</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -71,7 +71,7 @@
 
                             Swal.fire({
                                 icon: 'success',
-                                title: 'Success',
+                                title: 'Succes',
                                 text: res.msg
                             });
 
@@ -81,9 +81,9 @@
                     error: function(xhr) {
                         Swal.fire({
                             icon: 'error',
-                            title: 'Terjadi Kesalahan',
+                            title: 'Error Occurring!',
                             text: xhr.responseJSON ? xhr.responseJSON.message :
-                                'An Error Occurred!'
+                                'Error Occurring!!'
                         });
 
                         if (xhr.responseJSON && xhr.responseJSON.msgField) {
