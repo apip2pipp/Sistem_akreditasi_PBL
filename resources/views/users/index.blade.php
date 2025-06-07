@@ -23,7 +23,7 @@
                                 <th>Email</th>
                                 <th>Name</th>
                                 <th>Level</th>
-                                <th>#</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                     </table>
