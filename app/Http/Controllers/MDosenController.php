@@ -22,7 +22,7 @@ class MDosenController extends Controller
     public function list(Request $request)
     {
         if ($request->ajax()) {
-            $data = mDosen::select('dosen_id', 'dosen_nip', 'dosen_nama', 'dosen_nidn', 'dosen_email', 'dosen_gender', 'user_id');
+            $data = mDosen::select('dosen_id', 'nama_dosen');
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->make(true);
