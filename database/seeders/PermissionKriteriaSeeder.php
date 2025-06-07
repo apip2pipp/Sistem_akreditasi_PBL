@@ -19,7 +19,7 @@ class PermissionKriteriaSeeder extends Seeder
         // Koordinator 1 -> Kriteria 1-4
         foreach (range(1, 4) as $kriteriaId) {
             DB::table('t_permission_kriteria_users')->insert([
-                'koordinator_id'     => 1,
+                'user_id'     => 4,
                 'status'      => true,
                 'kriteria_id' => $kriteriaId,
                 'created_at'  => $now,
@@ -30,7 +30,7 @@ class PermissionKriteriaSeeder extends Seeder
         // Koordinator 2 -> Kriteria 5-9
         foreach (range(5, 9) as $kriteriaId) {
             DB::table('t_permission_kriteria_users')->insert([
-                'koordinator_id'     => 2,
+                'user_id'     => 5,
                 'status'      => true,
                 'kriteria_id' => $kriteriaId,
                 'created_at'  => $now,
