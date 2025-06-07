@@ -10,6 +10,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Yajra\DataTables\Facades\DataTables;
 use App\Models\mKriteria;
 use App\Models\mKoordinator;
+use App\Models\mLevel;
+use App\Models\mUser;
 use Illuminate\Support\Facades\Log;
 
 class TPermissionKriteriaUserController extends Controller
@@ -20,9 +22,16 @@ class TPermissionKriteriaUserController extends Controller
             abort(403);
         }
 
-        $query = mKoordinator::with(['permissions.kriteria'])->select('koordinator_id', 'koordinator_nama');
+        $users = mUser::with(['permissions.kriteria', 'level'])
+            ->whereHas('level', function ($query) {
+                $query->where('level_kode', 'KDR')
+                    ->orWhere('level_nama', 'Koordinator');
+            })
+            ->select('user_id', 'name')
+            ->get();
 
-        return DataTables::of($query)
+
+        return DataTables::of($users)
             ->addIndexColumn()
             ->addColumn('hak_permission', function ($koordinator) {
                 // Ambil permission kriteria yang statusnya aktif
@@ -54,18 +63,28 @@ class TPermissionKriteriaUserController extends Controller
 
     public function edit($id)
     {
-        $koordinator = mKoordinator::with(['permissions.kriteria'])->find($id);
+        $koordinator = mUser::with('level')
+            ->whereHas('level', function ($query) {
+                $query->where('level_kode', 'KDR')
+                    ->orWhere('level_nama', 'Koordinator');
+            })
+            ->findOrFail($id);
         $kriteria = mKriteria::all();
         return view('permission_kriteria.edit', compact('koordinator', 'kriteria'));
     }
 
     public function update(Request $request, $id)
     {
-        $koordinator = mKoordinator::findOrFail($id);
+        $koordinator = mUser::with('level')
+            ->whereHas('level', function ($query) {
+                $query->where('level_kode', 'KDR')
+                    ->orWhere('level_nama', 'Koordinator');
+            })
+            ->findOrFail($id);
         $kriteriaIds = array_filter($request->input('kriteria', [])); // hanya yg dicentang
 
         Log::debug('Update Permission Request Data', [
-            'koordinator_id' => $id,
+            'user_id' => $id,
             'input_kriteria' => $request->input('kriteria'),
             'filtered_kriteriaIds' => $kriteriaIds
         ]);
@@ -73,7 +92,7 @@ class TPermissionKriteriaUserController extends Controller
         DB::beginTransaction();
         try {
             // Hapus semua yang tidak dicentang
-            $deleted = tPermissionKriteriaUser::where('koordinator_id', $id)
+            $deleted = tPermissionKriteriaUser::where('user_id', $id)
                 ->whereNotIn('kriteria_id', $kriteriaIds)
                 ->delete();
 
@@ -85,7 +104,7 @@ class TPermissionKriteriaUserController extends Controller
             foreach ($kriteriaIds as $kriteriaId) {
                 $permission = tPermissionKriteriaUser::updateOrCreate(
                     [
-                        'koordinator_id' => $id,
+                        'user_id' => $id,
                         'kriteria_id' => $kriteriaId,
                     ],
                     [
@@ -93,7 +112,7 @@ class TPermissionKriteriaUserController extends Controller
                     ]
                 );
                 Log::debug('Permission upserted', [
-                    'koordinator_id' => $id,
+                    'user_id' => $id,
                     'kriteria_id' => $kriteriaId,
                     'model_id' => $permission->id_permission_kriteria_user ?? null
                 ]);
