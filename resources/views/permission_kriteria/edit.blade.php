@@ -13,7 +13,7 @@
             <div class="modal-body">
                 {{-- Checklist Kriteria --}}
                 <div class="form-group">
-                    <label class="font-weight-bold mb-2">Hak Akses Kriteria</label>
+                    <label class="font-weight-bold mb-2">Criteria Access Rights</label>
 
                     <div class="border rounded p-3" style="max-height: 300px; overflow-y: auto;">
                         @forelse ($kriteria as $item)
@@ -26,7 +26,7 @@
                                 </label>
                             </div>
                         @empty
-                            <p class="text-muted">Belum ada kriteria yang tersedia.</p>
+                            <p class="text-muted">No criteria available yet.</p>
                         @endforelse
                     </div>
 
@@ -36,8 +36,8 @@
 
 
             <div class="modal-footer">
-                <button type="button" data-dismiss="modal" class="btn btn-warning">Batal</button>
-                <button type="submit" class="btn btn-primary">Perbarui</button>
+                <button type="button" data-dismiss="modal" class="btn btn-warning">Cancel</button>
+                <button type="submit" class="btn btn-primary">Update</button>
             </div>
         </div>
     </div>
@@ -52,7 +52,7 @@
             },
             messages: {
                 'kriteria[]': {
-                    required: 'Minimal pilih satu kriteria.'
+                    required: 'Select at least one criteria.'
                 }
             },
             submitHandler: function(form) {
@@ -65,9 +65,9 @@
                             $('#myModal').modal('hide');
                             Swal.fire({
                                 icon: 'success',
-                                title: 'Berhasil',
+                                title: 'Success',
                                 text: res.message ??
-                                    'Permission berhasil diperbarui!'
+                                    'Permission updated successfully!'
                             });
                             dataMaster.ajax.reload();
                         }
@@ -77,7 +77,7 @@
                             icon: 'error',
                             title: 'Terjadi Kesalahan',
                             text: xhr.responseJSON?.message ??
-                                'Terjadi kesalahan!'
+                                'An Error Occurred!'
                         });
 
                         if (xhr.responseJSON && xhr.responseJSON.msgField) {
