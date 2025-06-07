@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Draft Akreditasi</title>
+    <title>Accreditation Draft</title>
     <style>
         body {
             font-family: sans-serif;
@@ -64,7 +64,7 @@
 
 <body>
 
-    <h2>Laporan Draft Akreditasi</h2>
+    <h2>Accreditation Draft Report</h2>
 
     <div class="section">
         <div class="section-title">1. Penetapan</div>
