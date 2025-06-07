@@ -5,7 +5,7 @@
     <div id="modal-master" class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Edit Data Penelitian</h5>
+                <h5 class="modal-title">Edit Research Data</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -14,7 +14,7 @@
             <div class="modal-body">
                 {{-- No Surat Tugas --}}
                 <div class="form-group row">
-                    <label class="col-2 control-label col-form-label">No Surat Tugas</label>
+                    <label class="col-2 control-label col-form-label">No Assignment Letter</label>
                     <div class="col-10">
                         <input type="text" class="form-control" name="no_surat_tugas"
                             value="{{ $penelitianDosen->penelitian->no_surat_tugas }}" required>
@@ -24,7 +24,7 @@
 
                 {{-- Judul Penelitian --}}
                 <div class="form-group row">
-                    <label class="col-2 control-label col-form-label">Judul Penelitian</label>
+                    <label class="col-2 control-label col-form-label">Research Title</label>
                     <div class="col-10">
                         <input type="text" class="form-control" name="judul_penelitian"
                             value="{{ $penelitianDosen->penelitian->judul_penelitian }}" required>
@@ -34,7 +34,7 @@
 
                 {{-- Pendanaan Internal --}}
                 <div class="form-group row">
-                    <label class="col-2 control-label col-form-label">Pendanaan Internal</label>
+                    <label class="col-2 control-label col-form-label">Internal Funding</label>
                     <div class="col-10">
                         <input type="text" class="form-control" name="pendanaan_internal"
                             value="{{ $penelitianDosen->penelitian->pendanaan_internal }}">
@@ -44,7 +44,7 @@
 
                 {{-- Pendanaan Eksternal --}}
                 <div class="form-group row">
-                    <label class="col-2 control-label col-form-label">Pendanaan Eksternal</label>
+                    <label class="col-2 control-label col-form-label">External Funding</label>
                     <div class="col-10">
                         <input type="text" class="form-control" name="pendanaan_eksternal"
                             value="{{ $penelitianDosen->penelitian->pendanaan_eksternal }}">
@@ -54,7 +54,7 @@
 
                 {{-- Link Penelitian --}}
                 <div class="form-group row">
-                    <label class="col-2 control-label col-form-label">Link Penelitian</label>
+                    <label class="col-2 control-label col-form-label">Research Links</label>
                     <div class="col-10">
                         <textarea name="link_penelitian" id="link_penelitian" class="form-control summernote">{!! $penelitianDosen->penelitian->link_penelitian !!}</textarea>
                         <small id="error-link_penelitian" class="form-text text-danger error-text"></small>
@@ -63,7 +63,7 @@
 
                  {{-- //form updatestatus --}}
                  <div class="form-group row">
-                    <label class="col-2 control-label col-form-label">Status Penelitian</label>
+                    <label class="col-2 control-label col-form-label">Research Status</label>
                     <div class="col-10">
                         <select name="status" class="form-control" required>
                             <option value="accepted"
@@ -81,7 +81,7 @@
 
 
             <div class="modal-footer">
-                <button type="button" data-dismiss="modal" class="btn btn-warning">Batal</button>
+                <button type="button" data-dismiss="modal" class="btn btn-warning">Cancel</button>
                 <button type="submit" class="btn btn-primary">Update</button>
             </div>
         </div>
@@ -95,7 +95,7 @@
 <script>
     $(document).ready(function () {
         $('#link_penelitian').summernote({
-            placeholder: 'Masukkan link penelitian atau deskripsi',
+            placeholder: 'Enter the research link or description',
             tabsize: 2,
             height: 200
         });
@@ -115,7 +115,7 @@
                             $('#myModal').modal('hide');
                             Swal.fire({
                                 icon: 'success',
-                                title: 'Berhasil',
+                                title: 'Success',
                                 text: res.message
                             });
                             dataMaster.ajax.reload();
@@ -124,8 +124,8 @@
                     error: function (xhr) {
                         Swal.fire({
                             icon: 'error',
-                            title: 'Terjadi Kesalahan',
-                            text: xhr.responseJSON?.message || 'Terjadi kesalahan!'
+                            title: 'An error has occurred',
+                            text: xhr.responseJSON?.message || 'An error has occurred!'
                         });
 
                         if (xhr.responseJSON?.msgField) {

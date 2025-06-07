@@ -13,11 +13,7 @@ return new class extends Migration
     {
         Schema::create('m_dosens', function (Blueprint $table) {
             $table->id('dosen_id');
-            $table->string('dosen_nip')->nullable()->unique();
-            $table->string('dosen_nidn')->nullable()->unique();
-            $table->string('dosen_nama', 100);
-            $table->string('dosen_email', 50)->unique();
-            $table->enum('dosen_gender', ['L', 'P']);
+            $table->string('nama_dosen', 100);
             $table->unsignedBigInteger('user_id')->index();
             $table->foreign('user_id')->references('user_id')->on('m_users');
             $table->timestamps();

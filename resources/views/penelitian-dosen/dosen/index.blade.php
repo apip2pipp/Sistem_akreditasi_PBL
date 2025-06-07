@@ -10,7 +10,7 @@
                 </h3>
                 <div class="card-tools">
                     <button onclick="modalAction('{{ url('penelitian-dosen/create') }}')"
-                        class="btn btn-sm btn-success mt-1">Tambah</button>
+                        class="btn btn-sm btn-success mt-1">Add</button>
                 </div>
             </div>
             <div class="card-body">
@@ -22,7 +22,7 @@
                                 <th>Nama Dosen</th>
                                 <th>Judul Penelitian</th>
                                 <th>Status</th>
-                                <th>#</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                     </table>
@@ -63,7 +63,7 @@
                         searchable: false,
                     },
                     {
-                        data: 'dosen.dosen_nama',
+                        data: 'dosen.name',
                         className: '',
                         defaultContent: '-',
                     },
@@ -115,7 +115,7 @@
                                     onclick="modalAction('${editUrl}')"
                                     title="Edit Data">
                                     <i class="fa fa-edit"></i>
-                                </a> 
+                                </a>
                                 <a href="javascript:void(0)"
                                     class="btn btn-xs btn-info text-white"
                                     onclick="modalAction('${showUrl}')"

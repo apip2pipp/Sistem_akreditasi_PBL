@@ -4,7 +4,7 @@
     <div id="modal-master" class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Tambah Data Penelitian</h5>
+                <h5 class="modal-title">Add Research Data</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -14,7 +14,7 @@
 
                 {{-- No Surat Tugas --}}
                 <div class="form-group row">
-                    <label class="col-2 control-label col-form-label">No Surat Tugas</label>
+                    <label class="col-2 control-label col-form-label">No Assignment Letter</label>
                     <div class="col-10">
                         <input type="text" class="form-control" name="no_surat_tugas" required>
                         <small id="error-no_surat_tugas" class="form-text text-danger error-text"></small>
@@ -23,7 +23,7 @@
 
                 {{-- Judul Penelitian --}}
                 <div class="form-group row">
-                    <label class="col-2 control-label col-form-label">Judul Penelitian</label>
+                    <label class="col-2 control-label col-form-label">Research Title</label>
                     <div class="col-10">
                         <input type="text" class="form-control" name="judul_penelitian" required>
                         <small id="error-judul_penelitian" class="form-text text-danger error-text"></small>
@@ -32,7 +32,7 @@
 
                 {{-- Pendanaan Internal --}}
                 <div class="form-group row">
-                    <label class="col-2 control-label col-form-label">Pendanaan Internal</label>
+                    <label class="col-2 control-label col-form-label">Internal Funding</label>
                     <div class="col-10">
                         <input type="text" class="form-control" name="pendanaan_internal">
                         <small id="error-pendanaan_internal" class="form-text text-danger error-text"></small>
@@ -41,7 +41,7 @@
 
                 {{-- Pendanaan Eksternal --}}
                 <div class="form-group row">
-                    <label class="col-2 control-label col-form-label">Pendanaan Eksternal</label>
+                    <label class="col-2 control-label col-form-label">External Funding</label>
                     <div class="col-10">
                         <input type="text" class="form-control" name="pendanaan_eksternal">
                         <small id="error-pendanaan_eksternal" class="form-text text-danger error-text"></small>
@@ -49,7 +49,7 @@
                 </div>
                 {{-- link_penelitian --}}
                 <div class="form-group row">
-                    <label class="col-2 control-label col-form-label">Link Penelitian</label>
+                    <label class="col-2 control-label col-form-label">Research Links</label>
                     <div class="col-10">
                         <textarea name="link_penelitian" id="link_penelitian" class="form-control"></textarea>
                         <small id="error-link_penelitian" class="form-text text-danger error-text"></small>
@@ -58,8 +58,8 @@
             </div>
 
             <div class="modal-footer">
-                <button type="button" data-dismiss="modal" class="btn btn-warning">Batal</button>
-                <button type="submit" class="btn btn-primary">Simpan</button>
+                <button type="button" data-dismiss="modal" class="btn btn-warning">Cancel</button>
+                <button type="submit" class="btn btn-primary">Save</button>
             </div>
         </div>
     </div>
@@ -68,7 +68,7 @@
 <script>
     $(document).ready(function() {
         $('#link_penelitian').summernote({
-            placeholder: 'Masukkan link penelitian atau deskripsi',
+            placeholder: 'Enter the research link or description',
             tabsize: 2,
             height: 200, // Adjust height of the editor
         });
@@ -92,7 +92,7 @@
 
                             Swal.fire({
                                 icon: 'success',
-                                title: 'Berhasil',
+                                title: 'Success',
                                 text: res.message
                             });
 
@@ -102,9 +102,9 @@
                     error: function(xhr) {
                         Swal.fire({
                             icon: 'error',
-                            title: 'Terjadi Kesalahan',
+                            title: 'An error has occurred',
                             text: xhr.responseJSON?.message ||
-                                'Terjadi kesalahan!'
+                                'An error has occurred!'
                         });
 
                         if (xhr.responseJSON?.msgField) {
