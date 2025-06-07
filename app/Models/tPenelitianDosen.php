@@ -13,15 +13,18 @@ class tPenelitianDosen extends Model
     protected $primaryKey = 'id_penelitian_dosen';
 
     protected $fillable = [
-        'dosen_id',
+        'user_id',
         'penelitian_id',
         'status',
     ];
 
     public function dosen()
     {
-        return $this->belongsTo(mDosen::class, 'dosen_id');
+        return $this->belongsTo(mUser::class, 'user_id');
     }
 
-
+    public function penelitian()
+    {
+        return $this->belongsTo(mPenelitian::class, 'penelitian_id');
+    }
 }
