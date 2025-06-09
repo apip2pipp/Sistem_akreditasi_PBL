@@ -103,11 +103,11 @@ class AkreditasiController extends Controller
             'pengendalian' => 'required|string',
             'peningkatan' => 'required|string',
 
-            'gambar_penetapan.*' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
-            'gambar_pelaksanaan.*' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
-            'gambar_evaluasi.*' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
-            'gambar_pengendalian.*' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
-            'gambar_peningkatan.*' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'gambar_penetapan.*' => 'nullable|mimes:jpg,jpeg,png,pdf|max:2048',
+            'gambar_pelaksanaan.*' => 'nullable|mimes:jpg,jpeg,png,pdf|max:2048',
+            'gambar_evaluasi.*' => 'nullable|mimes:jpg,jpeg,png,pdf|max:2048',
+            'gambar_pengendalian.*' => 'nullable|mimes:jpg,jpeg,png,pdf|max:2048',
+            'gambar_peningkatan.*' => 'nullable|mimes:jpg,jpeg,png,pdf|max:2048',
 
             'judul_ppepp' => 'required|string',
         ]);
@@ -323,11 +323,11 @@ class AkreditasiController extends Controller
             'evaluasi' => 'required|string',
             'pengendalian' => 'required|string',
             'peningkatan' => 'required|string',
-            'gambar_penetapan.*' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
-            'gambar_pelaksanaan.*' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
-            'gambar_evaluasi.*' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
-            'gambar_pengendalian.*' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
-            'gambar_peningkatan.*' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'gambar_penetapan.*' => 'nullable|mimes:jpg,jpeg,png,pdf|max:2048',
+            'gambar_pelaksanaan.*' => 'nullable|mimes:jpg,jpeg,png,pdf|max:2048',
+            'gambar_evaluasi.*' => 'nullable|mimes:jpg,jpeg,png,pdf|max:2048',
+            'gambar_pengendalian.*' => 'nullable|mimes:jpg,jpeg,png,pdf|max:2048',
+            'gambar_peningkatan.*' => 'nullable|mimes:jpg,jpeg,png,pdf|max:2048',
         ]);
         // dd($validated);
         Log::info("Validasi data berhasil.", ['validated_data' => $validated]);
@@ -545,11 +545,11 @@ class AkreditasiController extends Controller
             'pengendalian' => 'required',
             'peningkatan' => 'required',
 
-            'gambar_penetapan.*' => 'nullable|mimes:jpg,jpeg,png|max:2048',
-            'gambar_pelaksanaan.*' => 'nullable|mimes:jpg,jpeg,png|max:2048',
-            'gambar_evaluasi.*' => 'nullable|mimes:jpg,jpeg,png|max:2048',
-            'gambar_pengendalian.*' => 'nullable|mimes:jpg,jpeg,png|max:2048',
-            'gambar_peningkatan.*' => 'nullable|mimes:jpg,jpeg,png|max:2048',
+            'gambar_penetapan.*' => 'nullable|mimes:jpg,jpeg,png,pdf|max:2048',
+            'gambar_pelaksanaan.*' => 'nullable|mimes:jpg,jpeg,png,pdf|max:2048',
+            'gambar_evaluasi.*' => 'nullable|mimes:jpg,jpeg,png,pdf|max:2048',
+            'gambar_pengendalian.*' => 'nullable|mimes:jpg,jpeg,png,pdf|max:2048',
+            'gambar_peningkatan.*' => 'nullable|mimes:jpg,jpeg,png,pdf|max:2048',
         ]);
 
         DB::beginTransaction();
@@ -559,7 +559,7 @@ class AkreditasiController extends Controller
                 return redirect()->route('akreditasi.index', ['slug' => $akreditasi->kriteria->route])->with('error', 'Data Akreditasi tidak dalam status Revisi.');
             }
             $fileAkreditasi = tFileAkreditasi::where('akreditasi_id', $id_akreditasi)->latest('created_at')->first();
-            if($fileAkreditasi->statusFile != 'Revisi'){
+            if ($fileAkreditasi->statusFile != 'Revisi') {
                 return redirect()->route('akreditasi.index', ['slug' => $akreditasi->kriteria->route])->with('error', 'Data Akreditasi tidak dalam status Revisi.');
             }
             // Update data yang sudah ada
@@ -653,10 +653,12 @@ class AkreditasiController extends Controller
         if ($request->hasFile($fieldName)) {
             foreach ($request->file($fieldName) as $file) {
                 $path = $file->store("akreditasi/{$fieldName}", 'public');
+                $mimeType = $file->getClientMimeType();
 
                 $modelClass::create([
                     $foreignKey => $foreignId,
                     $fileColumn => $path,
+                    'mime_type' => $mimeType,
                 ]);
             }
         }
