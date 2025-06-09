@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id('id_permission_kriteria_user');
             $table->unsignedBigInteger('kriteria_id')->index();
             $table->foreign('kriteria_id')->references('kriteria_id')->on('m_kriterias');
-            $table->unsignedBigInteger('koordinator_id')->index();
-            $table->foreign('koordinator_id')->references('koordinator_id')->on('m_koordinators');
+            $table->unsignedBigInteger('user_id')->index();
+            $table->foreign('user_id')->references('user_id')->on('m_users');
             $table->boolean('status')->default(true);
             $table->timestamps();
         });

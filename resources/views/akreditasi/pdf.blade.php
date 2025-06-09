@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Draft Akreditasi</title>
+    <title>Accreditation Draft</title>
     <style>
         body {
             font-family: sans-serif;
@@ -30,55 +30,53 @@
 
         .section-content {
             margin-bottom: 15px;
-            overflow: hidden;
-            /* Prevents text and images from overlapping */
         }
 
-        .image {
-            margin-top: 10px;
-            max-width: 100%;
-            height: auto;
-            display: block;
-            margin-bottom: 10px;
-            clear: both;
-            /* Ensures that the image does not overlap text */
-        }
-
-        .gambar-wrapper {
-            margin-top: 10px;
-            clear: both;
-            /* Clears the float for any previous elements */
-        }
-
-        .gambar-wrapper img {
-            max-height: 150px;
-            margin-right: 10px;
-            margin-bottom: 10px;
-            display: inline-block;
-            /* Allows images to be placed side by side */
-            max-width: 100%;
-            /* Prevents the images from being too large */
+        .app-image-style {
+            height: 120px;
+            position: absolute;
+            top: 10px;
         }
     </style>
 </head>
 
 <body>
 
+    {{-- HEADER POLINEMA --}}
+    <img src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('img/poltek.jpeg'))) }}"
+        class="app-image-style" />
+
+    <table align="center" border="0" cellpadding="1" class="main" style="margin-top: 10px;">
+        <tbody>
+            <tr>
+                <td colspan="3">
+                    <div align="center">
+                        <span style="font-size: 18px; font-weight: bold;">
+                            KEMENTERIAN PENDIDIKAN, KEBUDAYAAN,<br />
+                            RISET, DAN TEKNOLOGI <br />
+                            POLITEKNIK NEGERI MALANG <br />
+                        </span>
+                        <span style="font-size: 16px;">
+                            JL. Soekarno Hatta No.9 Malang 65141<br />
+                            Telp (0341) 404424 - 404425 Fax (0341) 404420<br />
+                            Laman://www.polinema.ac.id
+                        </span>
+                        <hr style="border-top: 4px double black; margin-top: 10px;" />
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    {{-- JUDUL LAPORAN --}}
     <h2>Laporan Draft Akreditasi</h2>
 
+    {{-- ISI LAPORAN --}}
     <div class="section">
         <div class="section-title">1. Penetapan</div>
         <div class="section-content">
             {!! $akreditasi->penetapan->penetapan !!}
         </div>
-        @if ($akreditasi->penetapan->gambarPenetapan->count())
-            <div class="gambar-wrapper">
-                @foreach ($akreditasi->penetapan->gambarPenetapan as $gambar)
-                    <img src="file://{{ public_path('storage/' . $gambar->gambar_penetapan) }}" class="image"
-                        alt="gambar penetapan">
-                @endforeach
-            </div>
-        @endif
     </div>
 
     <div class="section">
@@ -86,14 +84,6 @@
         <div class="section-content">
             {!! $akreditasi->pelaksanaan->pelaksanaan !!}
         </div>
-        @if ($akreditasi->pelaksanaan->gambarPelaksanaan->count())
-            <div class="gambar-wrapper">
-                @foreach ($akreditasi->pelaksanaan->gambarPelaksanaan as $gambar)
-                    <img src="file://{{ public_path('storage/' . $gambar->gambar_pelaksanaan) }}" class="image"
-                        alt="gambar pelaksanaan">
-                @endforeach
-            </div>
-        @endif
     </div>
 
     <div class="section">
@@ -101,14 +91,6 @@
         <div class="section-content">
             {!! $akreditasi->evaluasi->evaluasi !!}
         </div>
-        @if ($akreditasi->evaluasi->gambarEvaluasi->count())
-            <div class="gambar-wrapper">
-                @foreach ($akreditasi->evaluasi->gambarEvaluasi as $gambar)
-                    <img src="file://{{ public_path('storage/' . $gambar->gambar_evaluasi) }}" class="image"
-                        alt="gambar evaluasi">
-                @endforeach
-            </div>
-        @endif
     </div>
 
     <div class="section">
@@ -116,14 +98,6 @@
         <div class="section-content">
             {!! $akreditasi->pengendalian->pengendalian !!}
         </div>
-        @if ($akreditasi->pengendalian->gambarPengendalian->count())
-            <div class="gambar-wrapper">
-                @foreach ($akreditasi->pengendalian->gambarPengendalian as $gambar)
-                    <img src="file://{{ public_path('storage/' . $gambar->gambar_pengendalian) }}" class="image"
-                        alt="gambar pengendalian">
-                @endforeach
-            </div>
-        @endif
     </div>
 
     <div class="section">
@@ -131,14 +105,6 @@
         <div class="section-content">
             {!! $akreditasi->peningkatan->peningkatan !!}
         </div>
-        @if ($akreditasi->peningkatan->gambarPeningkatan->count())
-            <div class="gambar-wrapper">
-                @foreach ($akreditasi->peningkatan->gambarPeningkatan as $gambar)
-                    <img src="file://{{ public_path('storage/' . $gambar->gambar_peningkatan) }}" class="image"
-                        alt="gambar peningkatan">
-                @endforeach
-            </div>
-        @endif
     </div>
 
 </body>

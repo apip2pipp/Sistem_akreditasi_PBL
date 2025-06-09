@@ -4,7 +4,7 @@
     <div id="modal-master" class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Tambah Data Pengguna</h5>
+                <h5 class="modal-title">Add User Data</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -31,7 +31,7 @@
 
                 {{-- Nama Lengkap --}}
                 <div class="form-group row">
-                    <label class="col-2 control-label col-form-label">Nama</label>
+                    <label class="col-2 control-label col-form-label">Name</label>
                     <div class="col-10">
                         <input type="text" class="form-control" name="name" required>
                         <small id="error-name" class="form-text text-danger error-text"></small>
@@ -49,7 +49,7 @@
 
                 {{-- Konfirmasi Password --}}
                 <div class="form-group row">
-                    <label class="col-2 control-label col-form-label">Konfirmasi Password</label>
+                    <label class="col-2 control-label col-form-label">Confirmation Password</label>
                     <div class="col-10">
                         <input type="password" class="form-control" name="password_confirmation" required>
                     </div>
@@ -60,7 +60,7 @@
                     <label class="col-2 control-label col-form-label">Level</label>
                     <div class="col-10">
                         <select class="form-control" name="level_id" required>
-                            <option value="">Pilih Level</option>
+                            <option value="">Select Level</option>
                             @foreach ($levels as $level)
                                 <option value="{{ $level->level_id }}">{{ $level->level_nama }}</option>
                             @endforeach
@@ -71,8 +71,8 @@
             </div>
 
             <div class="modal-footer">
-                <button type="button" data-dismiss="modal" class="btn btn-warning">Batal</button>
-                <button type="submit" class="btn btn-primary">Simpan</button>
+                <button type="button" data-dismiss="modal" class="btn btn-warning">Cancel</button>
+                <button type="submit" class="btn btn-primary">Save</button>
             </div>
         </div>
     </div>

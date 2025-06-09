@@ -10,7 +10,7 @@
                 </h3>
                 <div class="card-tools">
                     <button onclick="modalAction('{{ url('management-users/user/create') }}')"
-                        class="btn btn-sm btn-success mt-1">Tambah</button>
+                        class="btn btn-sm btn-success mt-1">Add</button>
                 </div>
             </div>
             <div class="card-body">
@@ -21,9 +21,9 @@
                                 <th>No</th>
                                 <th>Username</th>
                                 <th>Email</th>
-                                <th>Nama</th>
+                                <th>Name</th>
                                 <th>Level</th>
-                                <th>#</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                     </table>
@@ -96,7 +96,7 @@
                                 <a href="javascript:void(0)"
                                     class="btn btn-xs btn-danger text-white"
                                     onclick="modalAction('{{ url('management-users/user') }}/${data}/delete')"
-                                    title="Hapus Data">
+                                    title="Delete Data">
                                     <i class="fa fa-trash"></i>
                                 </a>`;
                             return html;

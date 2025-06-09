@@ -34,12 +34,12 @@ class MUserController extends Controller
     public function index()
     {
         $breadcrumb = (object) [
-            'title' => 'Daftar Pengguna',
-            'list' => ['Home', 'Pengguna']
+            'title' => 'User List',
+            'list' => ['Home', 'User']
         ];
 
         $page = (object) [
-            'title' => 'Daftar pengguna yang terdaftar dalam sistem'
+            'title' => 'List of users registered in the system'
         ];
 
         return view('users.index', compact('breadcrumb', 'page'));
@@ -78,7 +78,7 @@ class MUserController extends Controller
 
 
         return response()->json([
-            'message' => 'Data pengguna berhasil disimpan'
+            'message' => 'User data saved successfully'
         ], Response::HTTP_OK);
     }
 
@@ -152,37 +152,37 @@ class MUserController extends Controller
             // Cek apakah user masih memiliki relasi (anak)
             if (mDosen::where('user_id', $id)->exists()) {
                 return response()->json([
-                    'message' => 'Tidak bisa dihapus karena masih terhubung sebagai Dosen.'
+                    'message' => 'Cannot be deleted because it is still connected as a Lecturer.'
                 ], Response::HTTP_FORBIDDEN);
             }
 
             if (mKaprodi::where('user_id', $id)->exists()) {
                 return response()->json([
-                    'message' => 'Tidak bisa dihapus karena masih terhubung sebagai Kaprodi.'
+                    'message' => 'Cannot be deleted because it is still connected as Kaprodi.'
                 ], Response::HTTP_FORBIDDEN);
             }
 
             if (mKoordinator::where('user_id', $id)->exists()) {
                 return response()->json([
-                    'message' => 'Tidak bisa dihapus karena masih terhubung sebagai Koordinator.'
+                    'message' => 'Cannot be deleted because it is still connected as Koordinator.'
                 ], Response::HTTP_FORBIDDEN);
             }
 
             if (mKajur::where('user_id', $id)->exists()) {
                 return response()->json([
-                    'message' => 'Tidak bisa dihapus karena masih terhubung sebagai Kajur.'
+                    'message' => 'Cannot be deleted because it is still connected as Kajur.'
                 ], Response::HTTP_FORBIDDEN);
             }
 
             if (mDirut::where('user_id', $id)->exists()) {
                 return response()->json([
-                    'message' => 'Tidak bisa dihapus karena masih terhubung sebagai Dirut.'
+                    'message' => 'Cannot be deleted because it is still connected as Dirut.'
                 ], Response::HTTP_FORBIDDEN);
             }
 
             if (mKjm::where('user_id', $id)->exists()) {
                 return response()->json([
-                    'message' => 'Tidak bisa dihapus karena masih terhubung sebagai KJM.'
+                    'message' => 'Cannot be deleted because it is still connected as KJM.'
                 ], Response::HTTP_FORBIDDEN);
             }
 
@@ -190,7 +190,7 @@ class MUserController extends Controller
             $mUser->delete();
 
             return response()->json([
-                'message' => 'Data berhasil dihapus!'
+                'message' => 'Data deleted successfully!'
             ], Response::HTTP_OK);
         }
 

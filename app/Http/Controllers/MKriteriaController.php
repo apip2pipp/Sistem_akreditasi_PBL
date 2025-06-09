@@ -23,12 +23,12 @@ class MKriteriaController extends Controller
     public function index()
     {
         $breadcrumb = (object)[
-            'title' => 'Daftar Kriteria',
+            'title' => 'List of Criteria',
             'list' => ['Home', 'Kriteria']
         ];
 
         $page = (object)[
-            'title' => 'Daftar kriteria yang terdaftar dalam sistem'
+            'title' => 'List of criteria registered in the system'
         ];
 
         return view('kriterias.index', compact('breadcrumb', 'page'));
@@ -52,7 +52,7 @@ class MKriteriaController extends Controller
 
         if ($validator->fails()) {
             return response()->json([
-                'message' => 'Validasi gagal!',
+                'message' => 'Validation failed!',
                 'msgField' => $validator->errors()
             ], Response::HTTP_BAD_REQUEST);
         }
@@ -60,7 +60,7 @@ class MKriteriaController extends Controller
         mKriteria::create($request->only('nama_kriteria', 'route'));
 
         return response()->json([
-            'message' => 'Data kriteria berhasil disimpan'
+            'message' => 'Criteria data successfully saved!'
         ], Response::HTTP_OK);
     }
 
@@ -79,7 +79,7 @@ class MKriteriaController extends Controller
         $mKriteria = mKriteria::find($id);
         if (!$mKriteria) {
             return response()->json([
-                'message' => 'Data kriteria tidak ditemukan'
+                'message' => 'Criteria data not found!'
             ], Response::HTTP_NOT_FOUND);
         }
 
@@ -90,7 +90,7 @@ class MKriteriaController extends Controller
 
         if ($validator->fails()) {
             return response()->json([
-                'message' => 'Validasi gagal!',
+                'message' => 'Validation failed!',
                 'msgField' => $validator->errors()
             ], Response::HTTP_BAD_REQUEST);
         }
@@ -98,7 +98,7 @@ class MKriteriaController extends Controller
         $mKriteria->update($request->only('nama_kriteria', 'route'));
 
         return response()->json([
-            'message' => 'Data kriteria berhasil diperbarui'
+            'message' => 'Criteria data successfully updated'
         ], Response::HTTP_OK);
     }
 
@@ -114,14 +114,14 @@ class MKriteriaController extends Controller
             $mKriteria = mKriteria::find($id);
             if (!$mKriteria) {
                 return response()->json([
-                    'message' => 'Data kriteria tidak ditemukan'
+                    'message' => 'Criteria data not found'
                 ], Response::HTTP_NOT_FOUND);
             }
 
             $mKriteria->delete();
 
             return response()->json([
-                'message' => 'Data kriteria berhasil dihapus!'
+                'message' => 'Criteria data successfully deleted!'
             ], Response::HTTP_OK);
         }
 

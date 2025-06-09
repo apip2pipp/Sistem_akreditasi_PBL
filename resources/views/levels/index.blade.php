@@ -10,7 +10,7 @@
                 </h3>
                 <div class="card-tools">
                     <button onclick="modalAction('{{ url('management-users/level/create') }}')"
-                        class="btn btn-sm btn-success mt-1">Tambah</button>
+                        class="btn btn-sm btn-success mt-1">Add</button>
                 </div>
             </div>
             <div class="card-body">
@@ -19,9 +19,9 @@
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Kode Level</th>
-                                <th>Nama Level</th>
-                                <th>#</th>
+                                <th>Level Code</th>
+                                <th>Level Name</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                     </table>

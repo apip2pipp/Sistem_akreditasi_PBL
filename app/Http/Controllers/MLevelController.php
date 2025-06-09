@@ -26,12 +26,12 @@ class MLevelController extends Controller
     public function index()
     {
         $breadcrumb = (object) [
-            'title' => 'Daftar Level Pengguna',
+            'title' => 'List of User Levels',
             'list' => ['Home', 'Level']
         ];
 
         $page = (object) [
-            'title' => 'Daftar level pengguna yang terdaftar dalam sistem'
+            'title' => 'List of registered user levels in the system'
         ];
         return view('levels.index', compact('breadcrumb', 'page'));
     }
@@ -59,14 +59,14 @@ class MLevelController extends Controller
 
         if ($validator->fails()) {
             return response()->json([
-                'message' => 'Validasi Gagal',
+                'message' => 'Validation Failed',
                 'msgField' => $validator->errors()
             ], Response::HTTP_BAD_REQUEST);
         }
         mLevel::create($request->all());
 
         return response()->json([
-            'message' => 'Data level berhasil disimpan'
+            'message' => 'The level data is saved successfully'
         ], Response::HTTP_OK);
     }
 
@@ -103,7 +103,7 @@ class MLevelController extends Controller
 
         if ($validator->fails()) {
             return response()->json([
-                'message' => 'Validasi gagal!',
+                'message' => 'Validation failed!',
                 'msgField' => $validator->errors()
             ], Response::HTTP_BAD_REQUEST);
         }
@@ -111,7 +111,7 @@ class MLevelController extends Controller
         $mLevel = mLevel::find($id);
         $mLevel->update($request->all());
         return response()->json([
-            'message' => 'Data berhasil diupdate'
+            'message' => 'Data successfully updated'
         ], Response::HTTP_OK);
     }
 
@@ -130,12 +130,12 @@ class MLevelController extends Controller
             $mLevel = mLevel::find($id);
             if (!$mLevel) {
                 return response()->json([
-                    'message' => 'Data tidak ditemukan'
+                    'message' => 'Data not found'
                 ], Response::HTTP_NOT_FOUND);
             }
             $mLevel->delete();
             return response()->json([
-                'message' => 'Data berhasil dihapus!'
+                'message' => 'Data successfully deleted!'
             ], Response::HTTP_OK);
         }
         return redirect('/dashboard');

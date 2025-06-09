@@ -2,7 +2,7 @@
     <div id="modal-master" class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Kesalahan!</h5>
+                <h5 class="modal-title">Error!</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -10,10 +10,10 @@
 
             <div class="modal-body">
                 <div class="alert alert-danger">
-                    <h5><i class="icon fas fa-ban"></i> Kesalahan !!!</h5>
-                    Data yang anda cari tidak ditemukan
+                    <h5><i class="icon fas fa-ban"></i> Error !!!</h5>
+                    The data you're looking for was not found
                 </div>
-                <a href="{{ route('level.index') }}" class="btn btn-warning">Kembali</a>
+                <a href="{{ route('level.index') }}" class="btn btn-warning">Back</a>
             </div>
         </div>
     </div>
@@ -25,7 +25,7 @@
         <div id="modal-master" class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Hapus Data Level</h5>
+                    <h5 class="modal-title">Delete Level Data</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -33,26 +33,26 @@
 
                 <div class="modal-body">
                     <div class="alert alert-warning">
-                        <h5><i class="icon fas fa-ban"></i> Konfirmasi !!!</h5>
-                        Apakah Anda ingin menghapus data seperti di bawah ini ?
+                        <h5><i class="icon fas fa-ban"></i> Confirmation !!!</h5>
+                        Do you want to delete the data as below ?
                     </div>
 
                     <table class="table table-sm table-bordered table-striped">
                         <tr>
-                            <th class="text-right col-3">Kode Level</th>
+                            <th class="text-right col-3">Code Level</th>
                             <td class="col-9">{{ $mLevel->level_kode }}</td>
                         </tr>
 
                         <tr>
-                            <th class="text-right col-3">Nama Level</th>
+                            <th class="text-right col-3">Name    Level</th>
                             <td class="col-9">{{ $mLevel->level_nama }}</td>
                         </tr>
                     </table>
                 </div>
 
                 <div class="modal-footer">
-                    <button type="button" data-dismiss="modal" class="btn btn-warning">Batal</button>
-                    <button type="submit" class="btn btn-primary">Ya, Hapus</button>
+                    <button type="button" data-dismiss="modal" class="btn btn-warning">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Yes, Delete</button>
                 </div>
             </div>
         </div>
@@ -73,7 +73,7 @@
 
                                 Swal.fire({
                                     icon: 'success',
-                                    title: 'Berhasil',
+                                    title: 'Success',
                                     text: res.message
                                 });
 
@@ -83,9 +83,9 @@
                         error: function(xhr, status, error) {
                             Swal.fire({
                                 icon: 'error',
-                                title: 'Terjadi Kesalahan',
+                                title: 'Error occurred',
                                 text: xhr.responseJSON ? xhr.responseJSON.message :
-                                    'Terjadi kesalahan!'
+                                    'Error occurred!'
                             });
 
                             if (xhr.responseJSON && xhr.responseJSON.msgField) {
