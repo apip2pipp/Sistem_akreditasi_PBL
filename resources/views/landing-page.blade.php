@@ -81,7 +81,7 @@
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
             <div class="lg:col-span-5">
                 <div class="relative">                   
-                    <img src="{{ asset('img\Component2.png') }}" alt="Students" class="rounded-lg">
+                    <img src="{{ asset('img\Component 2.png') }}" alt="Students" class="rounded-lg">
                 </div>
             </div>
 
