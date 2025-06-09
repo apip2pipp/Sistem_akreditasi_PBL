@@ -15,8 +15,8 @@ class DashboardController extends Controller
         ];
         $activeMenu = 'dashboard';
 
-        $countdosen = mDosen::count();
-        return view('dashboard.index', compact('breadcrumb', 'activeMenu', 'countdosen'));
+
+        return view('dashboard.index', compact('breadcrumb', 'activeMenu', ));
     }
 }
 
