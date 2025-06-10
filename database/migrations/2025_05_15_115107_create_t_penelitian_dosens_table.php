@@ -11,16 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('m_kajurs', function (Blueprint $table) {
-            $table->id('kajur_id');
+        Schema::create('t_penelitian_dosens', function (Blueprint $table) {
+            $table->id('id_penelitian_dosen');
             $table->unsignedBigInteger('user_id')->index();
             $table->foreign('user_id')->references('user_id')->on('m_users');
-            $table->string('kajur_nama', 100);
-            $table->string('kajur_nidn')->nullable()->unique();
-            $table->string('kajur_nip')->nullable()->unique();
-            $table->string('kajur_email')->nullable()->unique();
-            $table->enum('kajur_gender', ['L', 'P']);
-            $table->enum('kajur_jurusan', ['Jurusan Teknologi Informasi']);
+            $table->unsignedBigInteger('penelitian_id')->index();
+            $table->foreign('penelitian_id')->references('id_penelitian')->on('m_penelitian_dosens');
+            $table->enum('status', ['pending', 'accepted', 'rejected'])->default('pending');
             $table->timestamps();
         });
     }
@@ -30,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('m_kajurs');
+        Schema::dropIfExists('t_penelitian_dosens');
     }
 };

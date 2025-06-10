@@ -1,4 +1,4 @@
-{{-- @php
+@php
     use Illuminate\Support\Facades\Auth;
     use Illuminate\Support\Facades\DB;
 
@@ -6,26 +6,36 @@
     $showKriteria = false;
     $listKriteria = [];
 
-    // Coba cari apakah user adalah koordinator
-    $koordinator = DB::table('m_koordinators')->where('user_id', $user->user_id)->first();
+    // Ambil level kode dari level_id user
+    $level = DB::table('m_levels')->where('level_id', $user->level_id)->first();
 
-    if ($koordinator) {
-        // Kalau user adalah koordinator, ambil kriteria berdasarkan permission
+    $isKoordinator = $level && (
+        $level->level_kode === 'KDR' ||
+        $level->level_nama === 'Koordinator'
+    );
+
+    if ($isKoordinator) {
+        // Ambil kriteria berdasarkan permission user ini
         $listKriteria = DB::table('t_permission_kriteria_users')
             ->join('m_kriterias', 't_permission_kriteria_users.kriteria_id', '=', 'm_kriterias.kriteria_id')
-            ->where('t_permission_kriteria_users.koordinator_id', $koordinator->koordinator_id)
+            ->where('t_permission_kriteria_users.user_id', $user->user_id)
             ->where('t_permission_kriteria_users.status', true)
             ->select('m_kriterias.*')
             ->get();
 
         $showKriteria = $listKriteria->isNotEmpty();
+    } elseif ($level && in_array($level->level_kode, ['ADM', 'DSN'])) {
+        // Admin dan Dosen tidak punya akses ke kriteria
+        $listKriteria = collect(); // kosong
+        $showKriteria = false;
     } else {
-        // Kalau bukan koordinator, ambil semua kriteria
+        // Selain itu (misalnya Direktur, KJM, Kaprodi, dll), ambil semua kriteria
         $listKriteria = DB::table('m_kriterias')->get();
-        $showKriteria = true;
+        $showKriteria = $listKriteria->isNotEmpty();
     }
 @endphp
- --}}
+
+
 
 <div class="sidebar">
     <!-- Sidebar user panel (optional) -->
@@ -55,123 +65,59 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             <!-- Add icons to the links using the .nav-icon class
              with font-awesome or any other icon font library -->
-            <li class="nav-item {{ Request::routeIs('dashboard') ? 'menu-open' : '' }}">
-                <a href="#" class="nav-link {{ Request::routeIs('dashboard') ? 'active' : '' }}">
-                    <i class="nav-icon fas fa-tachometer-alt"></i>
-                    <p>
-                        Dashboard
-                        <i class="right fas fa-angle-left"></i>
-                    </p>
-                </a>
-                <ul class="nav nav-treeview">
-                    <li class="nav-item">
+            <li class="nav-header">
+                <li class="nav-item">
                         <a href="{{ route('dashboard') }}"
                             class="nav-link {{ Request::routeIs('dashboard') ? 'active' : '' }}">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>Dashboard v1</p>
+                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                            <p>Dashboard </p>
                         </a>
                     </li>
-                </ul>
+
             </li>
 
-            <li class="nav-header">Settings User</li>
-            <li class="nav-item">
-                <a href="{{ route('user.index') }}" class="nav-link {{ Request::routeIs('user*') ? 'active' : '' }}">
-                    <i class="nav-icon fas fa-users"></i>
-                    <p>User</p>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="{{ route('level.index') }}"
-                    class="nav-link {{ Request::routeis('level*') ? 'active' : '' }}">
-                    <i class="nav-icon far fa-plus-square"></i>
-                    <p>Role</p>
-                </a>
-            </li>
             @if (auth()->user()->level->level_kode === 'ADM')
-                <li
-                    class="nav-item {{ Request::routeIs('dosen*') || Request::routeIs('kaprodi*') || Request::routeIs('koordinator*') || Request::routeIs('kjm*') || Request::routeIs('direktur-utama*') || Request::routeIs('ketua-jurusan*') ? 'menu-open' : '' }}">
-                    <a href="#"
-                        class="nav-link {{ Request::routeIs('dosen*') || Request::routeIs('kaprodi*') || Request::routeIs('koordinator*') || Request::routeIs('kjm*') || Request::routeIs('direktur-utama*') || Request::routeIs('ketua-jurusan*') ? 'active' : '' }}"
-                        id="managementUsersLink">
-                        <i class="nav-icon fas fa-ellipsis-h"></i>
+                <li class="nav-header">Settings User</li>
+                <li class="nav-item">
+                    <a href="{{ route('user.index') }}"
+                        class="nav-link {{ Request::routeIs('user*') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-users"></i>
+                        <p>User</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('level.index') }}"
+                        class="nav-link {{ Request::routeis('level*') ? 'active' : '' }}">
+                        <i class="nav-icon far fa-plus-square"></i>
+                        <p>Role</p>
+                    </a>
+                </li>
+
+                <li class="nav-header">Add Criteria</li>
+                <li class="nav-item">
+                    <a href="{{ route('kriteria.index') }}"
+                        class="nav-link {{ Request::routeIs('kriteria.index') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-book"></i>
                         <p>
-                            Academic Stucture
-                            <i class="fas fa-angle-left right"></i>
+                            Manage Criteria
                         </p>
                     </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="{{ route('direktur-utama.index') }}"
-                                class="nav-link {{ Request::routeIs('direktur-utama*') ? 'active' : '' }}">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Direktur Utama</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('kjm.index') }}"
-                                class="nav-link {{ Request::routeIs('kjm*') ? 'active' : '' }}">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>KJM</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('ketua-jurusan.index') }}"
-                                class="nav-link {{ Request::routeIs('ketua-jurusan*') ? 'active' : '' }}">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>ketua jurusan</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('kaprodi.index') }}"
-                                class="nav-link {{ Request::routeIs('kaprodi*') ? 'active' : '' }}">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Kaprodi</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('dosen.index') }}"
-                                class="nav-link {{ Request::routeIs('dosen*') ? 'active' : '' }}">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Dosen</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('koordinator.index') }}"
-                                class="nav-link {{ Request::routeIs('koordinator*') ? 'active' : '' }}">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>koordinator</p>
-                            </a>
-                        </li>
-                    </ul>
+                </li>
+
+
+                <li class="nav-header">Setting Crriteria</li>
+                <li class="nav-item">
+                    <a href="{{ route('permission-kriteria.index') }}"
+                        class="nav-link {{ Request::routeIs('permission-kriteria.index') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-columns"></i>
+                        <p>
+                            Permission Kriteria
+                        </p>
+                    </a>
                 </li>
             @endif
 
-
-            <li class="nav-header">Add Criteria</li>
-            <li class="nav-item">
-                <a href="{{ route('kriteria.index') }}"
-                    class="nav-link {{ Request::routeIs('kriteria.index') ? 'active' : '' }}">
-                    <i class="nav-icon fas fa-book"></i>
-                    <p>
-                        Managae Criteria
-                    </p>
-                </a>
-            </li>
-
-
-            <li class="nav-header">Setting Crriteria</li>
-            <li class="nav-item">
-                <a href="{{ route('permission-kriteria.index') }}"
-                    class="nav-link {{ Request::routeIs('permission-kriteria.index') ? 'active' : '' }}">
-                    <i class="nav-icon fas fa-columns"></i>
-                    <p>
-                        Permission Kriteria
-                    </p>
-                </a>
-            </li>
-
-             {{-- @if ($listKriteria->isNotEmpty())
+            @if ($listKriteria->isNotEmpty())
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-layer-group"></i>
@@ -180,8 +126,8 @@
                             <i class="fas fa-angle-left right"></i>
                             <span class="badge badge-info right">{{ $listKriteria->count() }}</span>
                         </p>
-                    </a> --}}
-                    {{-- <ul class="nav nav-treeview">
+                    </a>
+                    <ul class="nav nav-treeview">
                         @foreach ($listKriteria as $kriteria)
                             <li class="nav-item">
                                 <a href="{{ route('akreditasi.index', ['slug' => $kriteria->route]) }}"
@@ -191,12 +137,12 @@
                                 </a>
                             </li>
                         @endforeach
-                    </ul> --}}
-                {{-- </li> --}}
+                    </ul>
+                </li>
                 {{-- manage Users --}}
-            {{-- @endif --}}
+            @endif
 
-            {{-- @if (auth()->user()->level->level_kode === 'DSN')
+            @if (auth()->user()->level->level_kode === 'DSN')
                 <li class="nav-item">
                     <a href="{{ route('penelitian-dosen.index') }}"
                         class="nav-link {{ Request::routeIs('penelitian-dosen.index') ? 'active' : '' }}">
@@ -206,8 +152,9 @@
                         </p>
                     </a>
                 </li>
-            @endif --}}
-            {{-- @if (auth()->user()->level->level_kode !== 'DSN')
+            @endif
+
+            @if (auth()->user()->level->level_kode === 'KDR')
                 <li class="nav-item">
                     <a href="{{ route('penelitian-dosen-koordinator.index') }}"
                         class="nav-link {{ Request::routeIs('penelitian-dosen-koordinator.index') ? 'active' : '' }}">
@@ -217,9 +164,9 @@
                         </p>
                     </a>
                 </li>
-            @endif --}}
-
-            <li class="nav-item">
+            @endif
+                
+            {{-- <li class="nav-item">
                 <a href="pages/widgets.html" class="nav-link">
                     <i class="nav-icon fas fa-th"></i>
                     <p>
@@ -814,7 +761,7 @@
                     <i class="nav-icon far fa-circle text-warning"></i>
                     <p>Warning</p>
                 </a>
-            </li>
+            </li> --}}
             <li class="nav-item">
                 <a href="{{ route('logout') }}" class="nav-link text-danger"
                     onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
