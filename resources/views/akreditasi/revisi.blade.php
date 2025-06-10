@@ -6,7 +6,7 @@
             <div class="card-header">
                 <h3 class="card-title mt-1">
                     <i class="fas fa-angle-double-right text-md text-primary mr-1"></i>
-                    Edit Accreditation Draft
+                    Edit Draft Akreditasi
                 </h3>
             </div>
             <div class="card-body">
@@ -16,7 +16,7 @@
 
                 <!-- Section for Comments and Status -->
                 <div class="mt-4">
-                    <h4>Status and Comments</h4>
+                    <h4>Status dan Komentar</h4>
 
                     <!-- Show Current Status -->
                     <div class="mb-3">
@@ -26,14 +26,14 @@
                         @elseif($akreditasi->status == 'final')
                             <span class="badge badge-info">Final</span>
                         @elseif($akreditasi->status == 'revisi')
-                            <span class="badge badge-danger">Revision</span>
+                            <span class="badge badge-danger">Revisi</span>
                         @elseif($akreditasi->status == 'selesai')
-                            <span class="badge badge-success">Finished</span>
+                            <span class="badge badge-success">Selesai</span>
                         @endif
                     </div>
 
                     <!-- Display Comments -->
-                    <h5>List of Comments</h5>
+                    <h5>Daftar Komentar</h5>
                     <div class="list-group">
                         @foreach ($showstatusandkomen as $komen)
                             {{-- kaprodi --}}
@@ -44,9 +44,9 @@
                                         @if ($komen->status_kaprodi == 'Pending')
                                             <span class="badge badge-warning">Draft</span>
                                         @elseif($komen->status_kaprodi == 'Ditolak')
-                                            <span class="badge badge-danger">Rejected</span>
+                                            <span class="badge badge-danger">Ditolak</span>
                                         @elseif($komen->status_kaprodi == 'Disetujui')
-                                            <span class="badge badge-success">Approved</span>
+                                            <span class="badge badge-success">Disetujui</span>
                                         @endif
                                     </strong>
                                     <p>{!! $komen->komentar_kaprodi ?? '-' !!}</p>
@@ -60,9 +60,9 @@
                                         @if ($komen->status_kajur == 'Pending')
                                             <span class="badge badge-warning">Draft</span>
                                         @elseif($komen->status_kajur == 'Ditolak')
-                                            <span class="badge badge-danger">Rejected</span>
+                                            <span class="badge badge-danger">Ditolak</span>
                                         @elseif($komen->status_kajur == 'Disetujui')
-                                            <span class="badge badge-success">Approved</span>
+                                            <span class="badge badge-success">Disetujui</span>
                                         @endif
                                     </strong>
                                     <p>{!! $komen->komentar_kajur ?? '-' !!}</p>
@@ -76,9 +76,9 @@
                                         @if ($komen->status_kjm == 'Pending')
                                             <span class="badge badge-warning">Draft</span>
                                         @elseif($komen->status_kjm == 'Ditolak')
-                                            <span class="badge badge-danger">Rejected</span>
+                                            <span class="badge badge-danger">Ditolak</span>
                                         @elseif($komen->status_kjm == 'Disetujui')
-                                            <span class="badge badge-success">Approved</span>
+                                            <span class="badge badge-success">Disetujui</span>
                                         @endif
                                     </strong>
                                     <p>{!! $komen->komentar_kjm ?? '-' !!}</p>
@@ -92,9 +92,9 @@
                                         @if ($komen->status_direktur_utama == 'Pending')
                                             <span class="badge badge-warning">Draft</span>
                                         @elseif($komen->status_direktur_utama == 'Ditolak')
-                                            <span class="badge badge-danger">Rejected</span>
+                                            <span class="badge badge-danger">Ditolak</span>
                                         @elseif($komen->status_direktur_utama == 'Disetujui')
-                                            <span class="badge badge-success">Approved</span>
+                                            <span class="badge badge-success">Disetujui</span>
                                         @endif
                                     </strong>
                                     <p>{!! $komen->komentar_direktur_utama ?? '-' !!}</p>
@@ -110,7 +110,7 @@
             <div class="card-header">
                 <h3 class="card-title mt-1">
                     <i class="fas fa-angle-double-right text-md text-primary mr-1"></i>
-                    Revision of Accreditation Draft
+                    Revisi Draft Akreditasi
                 </h3>
             </div>
             <div class="card-body">
@@ -123,6 +123,7 @@
                         </ul>
                     </div>
                 @endif
+                @php use Illuminate\Support\Str; @endphp
                 <form action="{{ route('akreditasi.revisi', $akreditasi->id_akreditasi) }}" method="POST"
                     enctype="multipart/form-data">
                     @csrf
@@ -146,7 +147,13 @@
                         <div class="row">
                             @foreach ($akreditasi->penetapan->gambarPenetapan as $gambar)
                                 <div class="col-md-3 mb-3">
-                                    <img src="{{ asset('storage/' . $gambar->gambar_penetapan) }}" class="img-thumbnail">
+                                    @if (Str::startsWith($gambar->mime_type, 'image/'))
+                                        <img src="{{ asset('storage/' . $gambar->gambar_penetapan) }}"
+                                            class="img-thumbnail">
+                                    @elseif($gambar->mime_type === 'application/pdf')
+                                        <a href="{{ asset('storage/' . $gambar->gambar_penetapan) }}" target="_blank">Lihat
+                                            PDF</a>
+                                    @endif
                                     <div class="form-check mt-1">
                                         <input type="checkbox" name="hapus_gambar_penetapan[]"
                                             value="{{ $gambar->id_gambar_penetapan }}" class="form-check-input">
@@ -157,7 +164,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="gambar_penetapan">Add Image Implementation</label>
+                        <label for="gambar_penetapan">Tambah Gambar Penetapan</label>
                         <input type="file" name="gambar_penetapan[]" class="form-control" multiple>
                     </div>
 
@@ -171,7 +178,14 @@
                         <div class="row">
                             @foreach ($akreditasi->pelaksanaan->gambarPelaksanaan as $gambar)
                                 <div class="col-md-3 mb-3">
-                                    <img src="{{ asset('storage/' . $gambar->gambar_pelaksanaan) }}" class="img-thumbnail">
+                                    @if (Str::startsWith($gambar->mime_type, 'image/'))
+                                        <img src="{{ asset('storage/' . $gambar->gambar_pelaksanaan) }}"
+                                            class="img-thumbnail">
+                                    @elseif($gambar->mime_type === 'application/pdf')
+                                        <a href="{{ asset('storage/' . $gambar->gambar_pelaksanaan) }}"
+                                            target="_blank">Lihat
+                                            PDF</a>
+                                    @endif
                                     <div class="form-check mt-1">
                                         <input type="checkbox" name="hapus_gambar_pelaksanaan[]"
                                             value="{{ $gambar->id_gambar_pelaksanaan }}" class="form-check-input">
@@ -182,7 +196,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="gambar_pelaksanaan">Add Image Implementation</label>
+                        <label for="gambar_pelaksanaan">Tambah Gambar Pelaksanaan</label>
                         <input type="file" name="gambar_pelaksanaan[]" class="form-control" multiple>
                     </div>
 
@@ -196,7 +210,14 @@
                         <div class="row">
                             @foreach ($akreditasi->evaluasi->gambarEvaluasi as $gambar)
                                 <div class="col-md-3 mb-3">
-                                    <img src="{{ asset('storage/' . $gambar->gambar_evaluasi) }}" class="img-thumbnail">
+                                    @if (Str::startsWith($gambar->mime_type, 'image/'))
+                                        <img src="{{ asset('storage/' . $gambar->gambar_evaluasi) }}"
+                                            class="img-thumbnail">
+                                    @elseif($gambar->mime_type === 'application/pdf')
+                                        <a href="{{ asset('storage/' . $gambar->gambar_evaluasi) }}"
+                                            target="_blank">Lihat
+                                            PDF</a>
+                                    @endif
                                     <div class="form-check mt-1">
                                         <input type="checkbox" name="hapus_gambar_evaluasi[]"
                                             value="{{ $gambar->id_gambar_evaluasi }}" class="form-check-input">
@@ -207,7 +228,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="gambar_evaluasi">Add Image Implementation</label>
+                        <label for="gambar_evaluasi">Tambah Gambar Evaluasi</label>
                         <input type="file" name="gambar_evaluasi[]" class="form-control" multiple>
                     </div>
 
@@ -221,8 +242,14 @@
                         <div class="row">
                             @foreach ($akreditasi->pengendalian->gambarPengendalian as $gambar)
                                 <div class="col-md-3 mb-3">
-                                    <img src="{{ asset('storage/' . $gambar->gambar_pengendalian) }}"
-                                        class="img-thumbnail">
+                                    @if (Str::startsWith($gambar->mime_type, 'image/'))
+                                        <img src="{{ asset('storage/' . $gambar->gambar_pengendalian) }}"
+                                            class="img-thumbnail">
+                                    @elseif($gambar->mime_type === 'application/pdf')
+                                        <a href="{{ asset('storage/' . $gambar->gambar_pengendalian) }}"
+                                            target="_blank">Lihat
+                                            PDF</a>
+                                    @endif
                                     <div class="form-check mt-1">
                                         <input type="checkbox" name="hapus_gambar_pengendalian[]"
                                             value="{{ $gambar->id_gambar_pengendalian }}" class="form-check-input">
@@ -233,7 +260,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="gambar_pengendalian">Add Image Implementation</label>
+                        <label for="gambar_pengendalian">Tambah Gambar Pengendalian</label>
                         <input type="file" name="gambar_pengendalian[]" class="form-control" multiple>
                     </div>
 
@@ -247,8 +274,14 @@
                         <div class="row">
                             @foreach ($akreditasi->peningkatan->gambarPeningkatan as $gambar)
                                 <div class="col-md-3 mb-3">
+                                    @if (Str::startsWith($gambar->mime_type, 'image/'))
                                     <img src="{{ asset('storage/' . $gambar->gambar_peningkatan) }}"
                                         class="img-thumbnail">
+                                        @elseif($gambar->mime_type === 'application/pdf')
+                                        <a href="{{ asset('storage/' . $gambar->gambar_peningkatan) }}"
+                                            target="_blank">Lihat
+                                            PDF</a>
+                                    @endif
                                     <div class="form-check mt-1">
                                         <input type="checkbox" name="hapus_gambar_peningkatan[]"
                                             value="{{ $gambar->id_gambar_peningkatan }}" class="form-check-input">
@@ -259,15 +292,15 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="gambar_peningkatan">Add Image Implementation</label>
+                        <label for="gambar_peningkatan">Tambah Gambar Peningkatan</label>
                         <input type="file" name="gambar_peningkatan[]" class="form-control" multiple>
                     </div>
 
                     {{-- Tombol Submit --}}
                     <div class="form-group text-right">
                         <a href="{{ route('akreditasi.index', ['slug' => $akreditasi->kriteria->route]) }}"
-                            class="btn btn-secondary">Back</a>
-                        <button type="submit" class="btn btn-success">Save Changes</button>
+                            class="btn btn-secondary">Kembali</a>
+                        <button type="submit" class="btn btn-success">Simpan Perubahan</button>
                         <button id="btn-generate-pdf" type="button" class="btn btn-warning">Generate PDF</button>
                     </div>
                 </form>
