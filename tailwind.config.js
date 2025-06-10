@@ -36,6 +36,9 @@ module.exports = {
                 'ijo7' : '#83CD20',
                 "light-accent": "#8ABD5F",
             },
+            fontFamily: {
+                'display': [ 'Oswald'],
+            },
         },
     },
     plugins: [],
