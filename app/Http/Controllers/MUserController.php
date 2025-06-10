@@ -21,7 +21,7 @@ class MUserController extends Controller
     public function list(Request $request)
     {
         if ($request->ajax()) {
-            $data = mUser::with('level')->select('user_id', 'username', 'email', 'name', 'level_id');
+            $data = mUser::with('level')->select('user_id', 'username', 'email', 'name', 'level_id', 'nidn');
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('level_nama', function ($row) {
@@ -34,12 +34,12 @@ class MUserController extends Controller
     public function index()
     {
         $breadcrumb = (object) [
-            'title' => 'User List',
-            'list' => ['Home', 'User']
+            'title' => 'Daftar Pengguna',
+            'list' => ['Home', 'Pengguna']
         ];
 
         $page = (object) [
-            'title' => 'List of users registered in the system'
+            'title' => 'Daftar pengguna yang terdaftar dalam sistem'
         ];
 
         return view('users.index', compact('breadcrumb', 'page'));
@@ -62,7 +62,8 @@ class MUserController extends Controller
             'email' => 'required|email|unique:m_users,email',
             'name' => 'required|string|max:100',
             'password' => 'required|string|min:6|confirmed',
-            'level_id' => 'required|exists:m_levels,level_id'
+            'level_id' => 'required|exists:m_levels,level_id',
+            'nidn' => 'nullable|string'
         ]);
 
         if ($validator->fails()) {
@@ -78,7 +79,7 @@ class MUserController extends Controller
 
 
         return response()->json([
-            'message' => 'User data saved successfully'
+            'message' => 'Data pengguna berhasil disimpan'
         ], Response::HTTP_OK);
     }
 
@@ -105,7 +106,8 @@ class MUserController extends Controller
             'name' => 'required|string|max:100',
             'email' => "required|email|unique:m_users,email,$id,user_id",
             'password' => 'nullable|string|min:6|confirmed',
-            'level_id' => 'required|exists:m_levels,level_id'
+            'level_id' => 'required|exists:m_levels,level_id',
+            'nidn' => 'nullable|string'
         ]);
 
         if ($validator->fails()) {
@@ -117,7 +119,7 @@ class MUserController extends Controller
 
         $mUser = mUser::find($id);
 
-        $data = $request->only(['username', 'email', 'name', 'level_id']);
+        $data = $request->only(['username', 'email', 'name', 'level_id', 'nidn']);
 
         if ($request->filled('password')) {
             $data['password'] = Hash::make($request->password);
@@ -149,48 +151,13 @@ class MUserController extends Controller
                 ], Response::HTTP_NOT_FOUND);
             }
 
-            // Cek apakah user masih memiliki relasi (anak)
-            if (mDosen::where('user_id', $id)->exists()) {
-                return response()->json([
-                    'message' => 'Cannot be deleted because it is still connected as a Lecturer.'
-                ], Response::HTTP_FORBIDDEN);
-            }
 
-            if (mKaprodi::where('user_id', $id)->exists()) {
-                return response()->json([
-                    'message' => 'Cannot be deleted because it is still connected as Kaprodi.'
-                ], Response::HTTP_FORBIDDEN);
-            }
-
-            if (mKoordinator::where('user_id', $id)->exists()) {
-                return response()->json([
-                    'message' => 'Cannot be deleted because it is still connected as Koordinator.'
-                ], Response::HTTP_FORBIDDEN);
-            }
-
-            if (mKajur::where('user_id', $id)->exists()) {
-                return response()->json([
-                    'message' => 'Cannot be deleted because it is still connected as Kajur.'
-                ], Response::HTTP_FORBIDDEN);
-            }
-
-            if (mDirut::where('user_id', $id)->exists()) {
-                return response()->json([
-                    'message' => 'Cannot be deleted because it is still connected as Dirut.'
-                ], Response::HTTP_FORBIDDEN);
-            }
-
-            if (mKjm::where('user_id', $id)->exists()) {
-                return response()->json([
-                    'message' => 'Cannot be deleted because it is still connected as KJM.'
-                ], Response::HTTP_FORBIDDEN);
-            }
 
             // Jika tidak ada relasi, hapus user
             $mUser->delete();
 
             return response()->json([
-                'message' => 'Data deleted successfully!'
+                'message' => 'Data berhasil dihapus!'
             ], Response::HTTP_OK);
         }
 
