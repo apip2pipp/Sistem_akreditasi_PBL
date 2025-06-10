@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('t_gambar_pengendalians', function (Blueprint $table) {
             $table->id('id_gambar_pengendalian');
             $table->string('gambar_pengendalian')->nullable();
+            $table->string('mime_type')->nullable();
             $table->unsignedBigInteger('pengendalian_id')->index()->nullable();
             $table->foreign('pengendalian_id')->references('id_pengendalian')->on('t_pengendalians');
             $table->timestamps();

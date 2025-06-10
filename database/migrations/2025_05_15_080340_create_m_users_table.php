@@ -16,8 +16,8 @@ return new class extends Migration
             $table->string('username', 100)->unique();
             $table->string('email', 100)->unique();
             $table->string('name', 100);
-            // $table->string('NIDN', 100)->nullable();
             $table->string('password');
+            $table->string('nidn', 100)->nullable();
             $table->unsignedBigInteger('level_id')->index();
             $table->foreign('level_id')->references('level_id')->on('m_levels');
             $table->timestamps();
