@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('t_akreditasis', function (Blueprint $table) {
             $table->id('id_akreditasi');
+            $table->string('judul_ppepp');
             $table->unsignedBigInteger('kriteria_id')->index();
             $table->foreign('kriteria_id')->references('kriteria_id')->on('m_kriterias');
             $table->unsignedBigInteger('penetapan_id')->index();
@@ -26,7 +27,7 @@ return new class extends Migration
             $table->unsignedBigInteger('peningkatan_id')->index();
             $table->foreign('peningkatan_id')->references('id_peningkatan')->on('t_peningkatans');
             $table->unsignedBigInteger('koordinator_id')->index();
-            $table->foreign('koordinator_id')->references('koordinator_id')->on('m_koordinators');
+            $table->foreign('koordinator_id')->references('user_id')->on('m_users');
             $table->enum('status', ['draft', 'final', 'revisi', 'selesai'])->default('draft');
             $table->timestamps();
         });
