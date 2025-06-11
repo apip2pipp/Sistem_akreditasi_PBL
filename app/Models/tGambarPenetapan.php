@@ -11,7 +11,7 @@ class tGambarPenetapan extends Model
 
     protected $table = 't_gambar_penetapans';
     protected $primaryKey = 'id_gambar_penetapan';
-    protected $fillable = ['gambar_penetapan', 'penetapan_id'];
+    protected $fillable = ['gambar_penetapan', 'penetapan_id', 'mime_type'];
 
     public function penetapan()
     {

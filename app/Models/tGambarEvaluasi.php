@@ -11,7 +11,7 @@ class tGambarEvaluasi extends Model
 
     protected $table = 't_gambar_evaluasis';
     protected $primaryKey = 'id_gambar_evaluasi';
-    protected $fillable = ['gambar_evaluasi', 'evaluasi_id'];
+    protected $fillable = ['gambar_evaluasi', 'evaluasi_id', 'mime_type'];
 
     public function evaluasi()
     {

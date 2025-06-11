@@ -11,7 +11,7 @@ class tGambarPeningkatan extends Model
 
     protected $table = 't_gambar_peningkatans';
     protected $primaryKey = 'id_gambar_peningkatan';
-    protected $fillable = ['gambar_peningkatan', 'peningkatan_id'];
+    protected $fillable = ['gambar_peningkatan', 'peningkatan_id', 'mime_type'];
 
     public function peningkatan()
     {
