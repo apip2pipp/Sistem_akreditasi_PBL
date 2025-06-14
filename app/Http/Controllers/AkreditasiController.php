@@ -69,12 +69,12 @@ class AkreditasiController extends Controller
             return abort(404);
         }
         $breadcrumb = (object)[
-            'title' => 'Daftar' . ' ' . $kriteria->nama_kriteria,
+            'title' => 'List' . ' ' . $kriteria->nama_kriteria,
             'list' => ['Home', $kriteria->nama_kriteria]
         ];
 
         $page = (object)[
-            'title' => 'Daftar' . ' ' . $kriteria->nama_kriteria
+            'title' => 'List' . ' ' . $kriteria->nama_kriteria
         ];
         $user = Auth::user();
         $roleKode = $user->level->level_kode;
@@ -90,10 +90,10 @@ class AkreditasiController extends Controller
      */
     public function draft(Request $request, $slug)
     {
-        Log::info("Draft akreditasi dimulai untuk slug: {$slug}");
+        Log::info("Accreditation draft begins for slug: {$slug}");
 
         $kriteria = mKriteria::where('route', $slug)->firstOrFail();
-        Log::info("Kriteria ditemukan", ['kriteria_id' => $kriteria->kriteria_id]);
+        Log::info("Criteria found", ['kriteria_id' => $kriteria->kriteria_id]);
 
         // Validasi input
         $validated = $request->validate([
@@ -114,7 +114,7 @@ class AkreditasiController extends Controller
 
         DB::beginTransaction();
         try {
-            Log::info("Menyimpan data teks...");
+            Log::info("Saving text data...");
 
             $penetapan = tPenetapan::create(['penetapan' => $validated['penetapan']]);
             $pelaksanaan = tPelaksanaan::create(['pelaksanaan' => $validated['pelaksanaan']]);
@@ -122,7 +122,7 @@ class AkreditasiController extends Controller
             $pengendalian = tPengendalian::create(['pengendalian' => $validated['pengendalian']]);
             $peningkatan = tPeningkatan::create(['peningkatan' => $validated['peningkatan']]);
 
-            Log::info("Data teks berhasil disimpan", [
+            Log::info("Text data successfully saved", [
                 'penetapan_id' => $penetapan->id_penetapan,
                 'pelaksanaan_id' => $pelaksanaan->id_pelaksanaan,
                 'evaluasi_id' => $evaluasi->id_evaluasi,
@@ -161,7 +161,7 @@ class AkreditasiController extends Controller
                 'status'          => 'draft',
             ]);
 
-            Log::info("Akreditasi berhasil dibuat", ['akreditasi_id' => $akreditasi->id_akreditasi]);
+            Log::info("Accreditation successfully created", ['akreditasi_id' => $akreditasi->id_akreditasi]);
 
             $akreditasi->refresh(); // Refresh semua relasi
             $akreditasi->load([
@@ -186,7 +186,7 @@ class AkreditasiController extends Controller
             $pdfPath = "akreditasi/{$akreditasi->judul_ppepp}.pdf";
             $pdf->save(storage_path("app/public/{$pdfPath}"));
 
-            Log::info("PDF draft disimpan", ['path' => $pdfPath]);
+            Log::info("PDF draft saved", ['path' => $pdfPath]);
 
             tFileAkreditasi::create([
                 'akreditasi_id'  => $akreditasi->id_akreditasi,
@@ -212,12 +212,12 @@ class AkreditasiController extends Controller
 
             DB::commit();
 
-            Log::info("Draft akreditasi berhasil disimpan dan commit berhasil.");
-            return back()->with('success', 'Draft akreditasi berhasil disimpan.');
+            Log::info("The accreditation draft has been successfully saved and committed..");
+            return back()->with('success', 'The accreditation draft has been successfully saved.');
         } catch (\Exception $e) {
             DB::rollBack();
-            Log::error("Gagal menyimpan draft akreditasi", ['error' => $e->getMessage()]);
-            return back()->withErrors(['error' => 'Gagal menyimpan draft: ' . $e->getMessage()]);
+            Log::error("Failed to save accreditation draft", ['error' => $e->getMessage()]);
+            return back()->withErrors(['error' => 'Failed to save draft: ' . $e->getMessage()]);
         }
     }
 
@@ -234,12 +234,12 @@ class AkreditasiController extends Controller
         $fileAkreditasi = tFileAkreditasi::where('akreditasi_id', $id_akreditasi)->latest('created_at')->first();
 
         $breadcrumb = (object)[
-            'title' => 'Daftar' . ' ' . $akreditasi->kriteria->nama_kriteria,
+            'title' => 'List' . ' ' . $akreditasi->kriteria->nama_kriteria,
             'list' => ['Home', $akreditasi->kriteria->nama_kriteria]
         ];
 
         $page = (object)[
-            'title' => 'Daftar' . ' ' . $akreditasi->kriteria->nama_kriteria
+            'title' => 'List' . ' ' . $akreditasi->kriteria->nama_kriteria
         ];
 
         return view('akreditasi.show', compact('akreditasi', 'fileAkreditasi', 'breadcrumb', 'page'));
@@ -260,12 +260,12 @@ class AkreditasiController extends Controller
         $fileAkreditasiShow = tFileAkreditasi::where('akreditasi_id', $id_akreditasi)->get();
 
         $breadcrumb = (object)[
-            'title' => 'Daftar' . ' ' . $akreditasi->kriteria->nama_kriteria,
+            'title' => 'List' . ' ' . $akreditasi->kriteria->nama_kriteria,
             'list' => ['Home', $akreditasi->kriteria->nama_kriteria]
         ];
 
         $page = (object)[
-            'title' => 'Daftar' . ' ' . $akreditasi->kriteria->nama_kriteria
+            'title' => 'List' . ' ' . $akreditasi->kriteria->nama_kriteria
         ];
 
         return view('akreditasi2.show', compact('akreditasi', 'fileAkreditasi', 'breadcrumb', 'page', 'fileAkreditasiShow'));
@@ -291,19 +291,19 @@ class AkreditasiController extends Controller
         $fileAkreditasi = tFileAkreditasi::where('akreditasi_id', $id_akreditasi)->latest('created_at')->first();
 
         $breadcrumb = (object)[
-            'title' => 'Daftar' . ' ' . $akreditasi->kriteria->nama_kriteria,
+            'title' => 'List' . ' ' . $akreditasi->kriteria->nama_kriteria,
             'list' => ['Home', $akreditasi->kriteria->nama_kriteria]
         ];
 
         $page = (object)[
-            'title' => 'Daftar' . ' ' . $akreditasi->kriteria->nama_kriteria
+            'title' => 'List' . ' ' . $akreditasi->kriteria->nama_kriteria
         ];
         return view('akreditasi.editDraft', compact('akreditasi', 'fileAkreditasi', 'breadcrumb', 'page'));
     }
 
     public function updateDraft(Request $request, $id_akreditasi)
     {
-        Log::info("Update draft akreditasi dimulai untuk id_akreditasi: {$id_akreditasi}");
+        Log::info("Update accreditation draft started for id_akreditasi: {$id_akreditasi}");
 
         $akreditasi = tAkreditasi::with([
             'fileAkreditasi',
@@ -330,11 +330,11 @@ class AkreditasiController extends Controller
             'gambar_peningkatan.*' => 'nullable|mimes:jpg,jpeg,png,pdf|max:2048',
         ]);
         // dd($validated);
-        Log::info("Validasi data berhasil.", ['validated_data' => $validated]);
+        Log::info("Data validation successful.", ['validated_data' => $validated]);
 
         DB::beginTransaction();
         try {
-            Log::info("Menyimpan data teks...");
+            Log::info("Saving text data...");
 
             // Update data teks
             $akreditasi->update([
@@ -362,7 +362,7 @@ class AkreditasiController extends Controller
 
                         // Cek apakah gambar ditemukan
                         if (!$gambar) {
-                            Log::error("Gambar dengan ID {$gambarId} tidak ditemukan di bagian {$bagian}");
+                            Log::error("File with ID {$gambarId} not found in section {$bagian}");
                             continue; // Skip ke gambar berikutnya
                         }
 
@@ -370,7 +370,7 @@ class AkreditasiController extends Controller
                         $gambarPath = $gambar->{"gambar_" . $bagian};  // Akses kolom yang sesuai, misalnya gambar_penetapan
 
                         if (empty($gambarPath)) {
-                            Log::error("Gambar dengan ID {$gambarId} tidak memiliki path gambar.");
+                            Log::error("File with ID {$gambarId} does not have an image path.");
                             continue; // Skip jika path gambar tidak ada
                         }
 
@@ -378,9 +378,9 @@ class AkreditasiController extends Controller
                         if (Storage::disk('public')->exists($gambarPath)) {
                             Storage::disk('public')->delete($gambarPath);  // Menghapus file gambar
                             $gambar->delete();  // Menghapus entri gambar dari database
-                            Log::info("Gambar {$gambarId} berhasil dihapus.");
+                            Log::info("File {$gambarId} successfully deleted.");
                         } else {
-                            Log::error("File gambar tidak ditemukan di penyimpanan: {$gambarPath}");
+                            Log::error("Image file not found in storage: {$gambarPath}");
                         }
                     }
                 }
@@ -405,11 +405,11 @@ class AkreditasiController extends Controller
 
             DB::commit();
 
-            Log::info("Draft akreditasi berhasil diperbarui & PDF berhasil dibuat.");
-            return redirect()->back()->with('success', 'Draft akreditasi berhasil diperbarui.');
+            Log::info("The accreditation draft has been successfully updated and the PDF has been successfully created.");
+            return redirect()->back()->with('success', 'The accreditation draft has been successfully updated.');
         } catch (\Exception $e) {
             DB::rollBack();
-            Log::error("Gagal memperbarui draft akreditasi", ['error' => $e->getMessage()]);
+            Log::error("Failed to update accreditation draft", ['error' => $e->getMessage()]);
             return redirect()->route('akreditasi.index', ['slug' => $akreditasi->kriteria->route])->withErrors(['error' => 'Gagal memperbarui draft: ' . $e->getMessage()]);
         }
     }
@@ -426,7 +426,7 @@ class AkreditasiController extends Controller
         ])->where('id_akreditasi', $id)->first();
         // dd($akreditasi);
         if (!$akreditasi) {
-            return response()->json(['error' => 'Data akreditasi tidak ditemukan'], 404);
+            return response()->json(['error' => 'Accreditation data not found'], 404);
         }
         $akreditasi->refresh();
         // Refresh & load relasi agar data paling baru digunakan
@@ -444,7 +444,7 @@ class AkreditasiController extends Controller
 
         // dd($pdfPath, $pdf);
 
-        Log::info("PDF akreditasi disimpan ulang", ['path' => $pdfPath]);
+        Log::info("PDF accreditation saved again", ['path' => $pdfPath]);
 
         // Update atau buat entri file akreditasi
         $file = $akreditasi->fileAkreditasi()->latest('created_at')->first();
@@ -464,7 +464,7 @@ class AkreditasiController extends Controller
             ]);
         }
 
-        return response()->json(['message' => 'PDF akreditasi berhasil diperbarui.']);
+        return response()->json(['message' => 'The accreditation PDF has been successfully updated..']);
     }
 
 
@@ -478,7 +478,7 @@ class AkreditasiController extends Controller
                 ->latest('created_at')->first();
             if ($fileAkreditasi->akreditasi->status == 'final') {
                 return response()->json([
-                    'error' => 'Akreditasi telah di finalisasi'
+                    'error' => 'Accreditation has been finalized'
                 ], 422); // You should return a 400 status code for validation errors
             }
 
@@ -497,10 +497,10 @@ class AkreditasiController extends Controller
             ]);
 
             DB::commit();
-            return back()->with('success', 'Status akreditasi berhasil difinalisasi.');
+            return back()->with('success', 'Accreditation status successfully finalized.');
         } catch (\Exception $e) {
             DB::rollBack();
-            return back()->withErrors(['error' => 'Gagal finalisasi: ' . $e->getMessage()]);
+            return back()->withErrors(['error' => 'Failed finalization: ' . $e->getMessage()]);
         }
     }
 
@@ -522,12 +522,12 @@ class AkreditasiController extends Controller
         $showstatusandkomen = tFileAkreditasi::where('akreditasi_id', $id_akreditasi)->get();
 
         $breadcrumb = (object)[
-            'title' => 'Daftar' . ' ' . $akreditasi->kriteria->nama_kriteria,
+            'title' => 'List' . ' ' . $akreditasi->kriteria->nama_kriteria,
             'list' => ['Home', $akreditasi->kriteria->nama_kriteria]
         ];
 
         $page = (object)[
-            'title' => 'Daftar' . ' ' . $akreditasi->kriteria->nama_kriteria
+            'title' => 'List' . ' ' . $akreditasi->kriteria->nama_kriteria
         ];
         return view('akreditasi.revisi', compact('akreditasi', 'fileAkreditasi', 'breadcrumb', 'page', 'showstatusandkomen'));
     }
@@ -582,7 +582,7 @@ class AkreditasiController extends Controller
 
                         // Cek apakah gambar ditemukan
                         if (!$gambar) {
-                            Log::error("Gambar dengan ID {$gambarId} tidak ditemukan di bagian {$bagian}");
+                            Log::error("File with ID {$gambarId} not found in section {$bagian}");
                             continue; // Skip ke gambar berikutnya
                         }
 
@@ -590,7 +590,7 @@ class AkreditasiController extends Controller
                         $gambarPath = $gambar->{"gambar_" . $bagian};  // Akses kolom yang sesuai, misalnya gambar_penetapan
 
                         if (empty($gambarPath)) {
-                            Log::error("Gambar dengan ID {$gambarId} tidak memiliki path gambar.");
+                            Log::error("File with ID {$gambarId} does not have an image path.");
                             continue; // Skip jika path gambar tidak ada
                         }
 
@@ -598,9 +598,9 @@ class AkreditasiController extends Controller
                         if (Storage::disk('public')->exists($gambarPath)) {
                             Storage::disk('public')->delete($gambarPath);  // Menghapus file gambar
                             $gambar->delete();  // Menghapus entri gambar dari database
-                            Log::info("Gambar {$gambarId} berhasil dihapus.");
+                            Log::info("File {$gambarId} successfully deleted.");
                         } else {
-                            Log::error("File gambar tidak ditemukan di penyimpanan: {$gambarPath}");
+                            Log::error("Image file not found in storage: {$gambarPath}");
                         }
                     }
                 }
@@ -640,10 +640,10 @@ class AkreditasiController extends Controller
             ]);
 
             DB::commit();
-            return back()->with('success', 'Revisi berhasil disimpan. Silakan finalisasi ulang.');
+            return back()->with('success', 'Revision successfully saved. Please finalize again.');
         } catch (\Exception $e) {
             DB::rollBack();
-            return back()->withErrors(['error' => 'Gagal menyimpan revisi: ' . $e->getMessage()]);
+            return back()->withErrors(['error' => 'Failed to save revision: ' . $e->getMessage()]);
         }
     }
 
@@ -662,7 +662,7 @@ class AkreditasiController extends Controller
                 ]);
             }
         }
-        Log::info("Menyimpan gambar ke tabel {$modelClass}", [
+        Log::info("Saving images to a table {$modelClass}", [
             'foreignKey' => $foreignKey,
             'foreignId' => $foreignId,
             'path' => $path,
@@ -680,7 +680,7 @@ class AkreditasiController extends Controller
             // dd($akreditasi, $fileAkreditasi);
             $kaprodiId = auth()->user();
             if (!$kaprodiId) {
-                return back()->with('error', 'Gagal mengambil data kaprodi dari user yang login');
+                return back()->with('error', 'Failed to retrieve program coordinator data from logged-in user');
             }
             $fileAkreditasi->update([
                 'status_kaprodi' => $request->status_kaprodi,
@@ -695,10 +695,10 @@ class AkreditasiController extends Controller
             }
 
             DB::commit();
-            return back()->with('success', 'Status akreditasi berhasil diperbarui oleh Kaprodi.');
+            return back()->with('success', 'The accreditation status has been successfully renewed by the Head of the Study Program.');
         } catch (\Exception $e) {
             DB::rollBack();
-            return back()->withErrors(['error' => 'Gagal memperbarui status Kaprodi: ' . $e->getMessage()]);
+            return back()->withErrors(['error' => 'Failed to update the Head of Study Program status: ' . $e->getMessage()]);
         }
     }
 
@@ -712,11 +712,11 @@ class AkreditasiController extends Controller
                 ->latest('created_at')->first();
 
             if ($fileAkreditasi->status_kaprodi !== 'Disetujui') {
-                return back()->withErrors(['error' => 'Status akreditasi belum disetujui oleh Kaprodi.']);
+                return back()->withErrors(['error' => 'Accreditation status has not been approved by the Head of Study Program.']);
             }
             $kajurId = auth()->user();
             if (!$kajurId) {
-                return back()->with('error', 'Gagal mengambil data kajur dari user yang login');
+                return back()->with('error', 'Failed to retrieve data from logged-in users');
             }
             $fileAkreditasi->update([
                 'status_kajur' => $request->status_kajur,
@@ -731,10 +731,10 @@ class AkreditasiController extends Controller
             }
             // dd($akreditasi, $fileAkreditasi, $kajurId);
             DB::commit();
-            return back()->with('success', 'Status akreditasi berhasil diperbarui oleh Kajur.');
+            return back()->with('success', 'The accreditation status has been successfully updated by the Head of Department.');
         } catch (\Exception $e) {
             DB::rollBack();
-            return back()->withErrors(['error' => 'Gagal memperbarui status Kajur: ' . $e->getMessage()]);
+            return back()->withErrors(['error' => 'Failed to update the Head of Department status: ' . $e->getMessage()]);
         }
     }
 
@@ -748,12 +748,12 @@ class AkreditasiController extends Controller
                 ->latest('created_at')->first();
 
             if ($fileAkreditasi->status_kajur !== 'Disetujui' && $fileAkreditasi->status_kaprodi !== 'Disetujui') {
-                return back()->withErrors(['error' => 'Status akreditasi belum disetujui oleh Kaprodi dan Kajur.']);
+                return back()->withErrors(['error' => 'Accreditation status has not yet been approved by the Head of Study Program and Head of Department.']);
             }
 
             $KjmID = auth()->user();
             if (!$KjmID) {
-                return back()->with('error', 'Gagal mengambil data KJM dari user yang login');
+                return back()->with('error', 'Failed to retrieve KJM data from logged-in user');
             }
 
             $fileAkreditasi->update([
@@ -769,10 +769,10 @@ class AkreditasiController extends Controller
             }
 
             DB::commit();
-            return back()->with('success', 'Status akreditasi berhasil diperbarui oleh KJM.');
+            return back()->with('success', 'Accreditation status successfully renewed by KJM.');
         } catch (\Exception $e) {
             DB::rollBack();
-            return back()->withErrors(['error' => 'Gagal memperbarui status KJM: ' . $e->getMessage()]);
+            return back()->withErrors(['error' => 'Failed to update KJM status: ' . $e->getMessage()]);
         }
     }
 
@@ -785,12 +785,12 @@ class AkreditasiController extends Controller
             $fileAkreditasi = tFileAkreditasi::where('akreditasi_id', $id_akreditasi)
                 ->latest('created_at')->first();
             if ($fileAkreditasi->status_kjm !== 'Disetujui' && $fileAkreditasi->status_kajur !== 'Disetujui' && $fileAkreditasi->status_kaprodi !== 'Disetujui') {
-                return back()->withErrors(['error' => 'Status akreditasi belum disetujui oleh Kaprodi, Kajur, dan KJM.']);
+                return back()->withErrors(['error' => 'Accreditation status has not been approved by the Head of Study Program, Head of Department, and KJM.']);
             }
 
             $IdDirekturUtama = auth()->user();
             if (!$IdDirekturUtama) {
-                return back()->with('error', 'Gagal mengambil data Direktur Utama dari user yang login');
+                return back()->with('error', 'Failed to retrieve the direktur data from the logged-in user');
             }
 
             $fileAkreditasi->update([
@@ -809,10 +809,10 @@ class AkreditasiController extends Controller
             }
 
             DB::commit();
-            return back()->with('success', 'Status akreditasi berhasil diperbarui oleh Direktur Utama.');
+            return back()->with('success', 'The accreditation status was successfully renewed by the President Director.');
         } catch (\Exception $e) {
             DB::rollBack();
-            return back()->withErrors(['error' => 'Gagal memperbarui status Direktur Utama: ' . $e->getMessage()]);
+            return back()->withErrors(['error' => 'Failed to update the status of the President Director: ' . $e->getMessage()]);
         }
     }
 
