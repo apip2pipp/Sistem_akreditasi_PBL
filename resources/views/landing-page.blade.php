@@ -91,7 +91,7 @@
                 </div>
 
                 <div class="lg:col-span-7">
-                    <h2 class="text-3xl font-bold text-primary mb-4">What is the meaning of Kriteria?</h2>
+                    <h2 class="text-3xl font-bold text-primary mb-4">What is the meaning of Criteria?</h2>
                     <p class="text-gray-600 mb-8">These criteria contain explanations that include setting, implementing,
                         evaluating, controlling, and improvement of Higher Education Standards related to the vision,
                         mission, goals, and strategies for achieving goals (VMTS) of LPPIS.</p>
