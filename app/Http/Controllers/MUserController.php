@@ -34,12 +34,12 @@ class MUserController extends Controller
     public function index()
     {
         $breadcrumb = (object) [
-            'title' => 'Daftar Pengguna',
-            'list' => ['Home', 'Pengguna']
+            'title' => 'User List',
+            'list' => ['Home', 'User']
         ];
 
         $page = (object) [
-            'title' => 'Daftar pengguna yang terdaftar dalam sistem'
+            'title' => 'List of users registered in the system'
         ];
 
         return view('users.index', compact('breadcrumb', 'page'));
@@ -68,7 +68,7 @@ class MUserController extends Controller
 
         if ($validator->fails()) {
             return response()->json([
-                'message' => 'Validasi Gagal',
+                'message' => 'Validation Failed',
                 'msgField' => $validator->errors()
             ], Response::HTTP_BAD_REQUEST);
         }
@@ -79,7 +79,7 @@ class MUserController extends Controller
 
 
         return response()->json([
-            'message' => 'Data pengguna berhasil disimpan'
+            'message' => 'User data successfully saved'
         ], Response::HTTP_OK);
     }
 
@@ -112,7 +112,7 @@ class MUserController extends Controller
 
         if ($validator->fails()) {
             return response()->json([
-                'message' => 'Validasi gagal!',
+                'message' => 'Validation failed!',
                 'msgField' => $validator->errors()
             ], Response::HTTP_BAD_REQUEST);
         }
@@ -128,7 +128,7 @@ class MUserController extends Controller
         $mUser->update($data);
 
         return response()->json([
-            'message' => 'Data pengguna berhasil diupdate'
+            'message' => 'User data successfully updated'
         ], Response::HTTP_OK);
     }
 
@@ -147,7 +147,7 @@ class MUserController extends Controller
 
             if (!$mUser) {
                 return response()->json([
-                    'message' => 'Data tidak ditemukan'
+                    'message' => 'Data not found'
                 ], Response::HTTP_NOT_FOUND);
             }
 
@@ -157,7 +157,7 @@ class MUserController extends Controller
             $mUser->delete();
 
             return response()->json([
-                'message' => 'Data berhasil dihapus!'
+                'message' => 'Data successfully deleted!'
             ], Response::HTTP_OK);
         }
 
