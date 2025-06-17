@@ -36,12 +36,12 @@ class TPenelitianDosenController extends Controller
     public function index()
     {
         $breadcrumb = (object)[
-            'title' => 'Daftar Penelitian Dosen',
-            'list' => ['Home', 'Penelitian Dosen']
+            'title' => 'List of Lecturer Research',
+            'list' => ['Home', 'Lecturer Research']
         ];
 
         $page = (object)[
-            'title' => 'Daftar penelitian dosen yang terdaftar dalam sistem'
+            'title' => 'List of faculty research projects registered in the system'
         ];
 
         return view('penelitian-dosen.dosen.index', compact('breadcrumb', 'page'));
@@ -76,7 +76,7 @@ class TPenelitianDosenController extends Controller
 
         if ($validator->fails()) {
             return response()->json([
-                'message' => 'Validasi Gagal',
+                'message' => 'Validation Failed',
                 'msgField' => $validator->errors()
             ], Response::HTTP_BAD_REQUEST);
         }
@@ -97,7 +97,7 @@ class TPenelitianDosenController extends Controller
 
             if (!$dosenId) {
                 return response()->json([
-                    'message' => 'Gagal mengambil data dosen dari user yang login'
+                    'message' => 'Failed to retrieve lecturer data from logged-in user'
                 ], Response::HTTP_INTERNAL_SERVER_ERROR);
             }
 
@@ -111,13 +111,13 @@ class TPenelitianDosenController extends Controller
             Log::info('Penelitian created: ', $penelitian->toArray());
 
             return response()->json([
-                'message' => 'Penelitian berhasil disimpan'
+                'message' => 'Research successfully saved'
             ], Response::HTTP_OK);
         } catch (\Exception $e) {
-            Log::error("Gagal menyimpan penelitian: " . $e->getMessage());
+            Log::error("Failed to save research: " . $e->getMessage());
 
             return response()->json([
-                'message' => 'Terjadi kesalahan saat menyimpan data.'
+                'message' => 'An error occurred while saving data.'
             ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
@@ -145,7 +145,7 @@ class TPenelitianDosenController extends Controller
 
         if (!$penelitianDosen) {
             return response()->json([
-                'message' => 'Data penelitian dosen tidak ditemukan.'
+                'message' => 'No research data from lecturers was found.'
             ], Response::HTTP_NOT_FOUND);
         }
 
@@ -154,7 +154,7 @@ class TPenelitianDosenController extends Controller
         $penelitianDosen->save();
 
         return response()->json([
-            'message' => 'Status penelitian dosen berhasil diubah.'
+            'message' => 'The status of the lecturer research has been successfully changed.'
         ], Response::HTTP_OK);
     }
 
@@ -185,7 +185,7 @@ class TPenelitianDosenController extends Controller
 
         if ($validator->fails()) {
             return response()->json([
-                'message' => 'Validasi Gagal',
+                'message' => 'Validation Failed',
                 'msgField' => $validator->errors()
             ], Response::HTTP_BAD_REQUEST);
         }
@@ -195,7 +195,7 @@ class TPenelitianDosenController extends Controller
 
         if (!$penelitianDosen) {
             return response()->json([
-                'message' => 'Data penelitian dosen tidak ditemukan.'
+                'message' => 'No research data from lecturers was found.    '
             ], Response::HTTP_NOT_FOUND);
         }
 
