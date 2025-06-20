@@ -6,7 +6,7 @@
             <div class="card-header">
                 <h3 class="card-title mt-1">
                     <i class="fas fa-angle-double-right text-md text-primary mr-1"></i>
-                    Edit Draft Akreditasi
+                    Edit Accreditation Draft
                 </h3>
             </div>
             <div class="card-body">
@@ -26,9 +26,9 @@
                         @elseif($akreditasi->status == 'final')
                             <span class="badge badge-info">Final</span>
                         @elseif($akreditasi->status == 'revisi')
-                            <span class="badge badge-danger">Revisi</span>
+                            <span class="badge badge-danger">Revision</span>
                         @elseif($akreditasi->status == 'selesai')
-                            <span class="badge badge-success">Selesai</span>
+                            <span class="badge badge-success">Finished</span>
                         @endif
                     </div>
 
@@ -44,9 +44,9 @@
                                         @if ($komen->status_kaprodi == 'Pending')
                                             <span class="badge badge-warning">Draft</span>
                                         @elseif($komen->status_kaprodi == 'Ditolak')
-                                            <span class="badge badge-danger">Ditolak</span>
+                                            <span class="badge badge-danger">Rejected</span>
                                         @elseif($komen->status_kaprodi == 'Disetujui')
-                                            <span class="badge badge-success">Disetujui</span>
+                                            <span class="badge badge-success">Approved</span>
                                         @endif
                                     </strong>
                                     <p>{!! $komen->komentar_kaprodi ?? '-' !!}</p>
@@ -60,9 +60,9 @@
                                         @if ($komen->status_kajur == 'Pending')
                                             <span class="badge badge-warning">Draft</span>
                                         @elseif($komen->status_kajur == 'Ditolak')
-                                            <span class="badge badge-danger">Ditolak</span>
+                                            <span class="badge badge-danger">Rejected</span>
                                         @elseif($komen->status_kajur == 'Disetujui')
-                                            <span class="badge badge-success">Disetujui</span>
+                                            <span class="badge badge-success">Approved</span>
                                         @endif
                                     </strong>
                                     <p>{!! $komen->komentar_kajur ?? '-' !!}</p>
@@ -76,9 +76,9 @@
                                         @if ($komen->status_kjm == 'Pending')
                                             <span class="badge badge-warning">Draft</span>
                                         @elseif($komen->status_kjm == 'Ditolak')
-                                            <span class="badge badge-danger">Ditolak</span>
+                                            <span class="badge badge-danger">Rejected</span>
                                         @elseif($komen->status_kjm == 'Disetujui')
-                                            <span class="badge badge-success">Disetujui</span>
+                                            <span class="badge badge-success">Approved</span>
                                         @endif
                                     </strong>
                                     <p>{!! $komen->komentar_kjm ?? '-' !!}</p>
@@ -92,9 +92,9 @@
                                         @if ($komen->status_direktur_utama == 'Pending')
                                             <span class="badge badge-warning">Draft</span>
                                         @elseif($komen->status_direktur_utama == 'Ditolak')
-                                            <span class="badge badge-danger">Ditolak</span>
+                                            <span class="badge badge-danger">Rejected</span>
                                         @elseif($komen->status_direktur_utama == 'Disetujui')
-                                            <span class="badge badge-success">Disetujui</span>
+                                            <span class="badge badge-success">Approved</span>
                                         @endif
                                     </strong>
                                     <p>{!! $komen->komentar_direktur_utama ?? '-' !!}</p>
@@ -110,7 +110,7 @@
             <div class="card-header">
                 <h3 class="card-title mt-1">
                     <i class="fas fa-angle-double-right text-md text-primary mr-1"></i>
-                    Revisi Draft Akreditasi
+                    Revision of Accreditation Draft
                 </h3>
             </div>
             <div class="card-body">
@@ -143,7 +143,7 @@
                         <textarea name="penetapan" id="penetapan" class="form-control summernote" rows="4" required>{!! $akreditasi->penetapan->penetapan !!}</textarea>
                     </div>
                     <div class="form-group">
-                        <label>Gambar Penetapan</label>
+                        <label>Supporting Documents Penetapan</label>
                         <div class="row">
                             @foreach ($akreditasi->penetapan->gambarPenetapan as $gambar)
                                 <div class="col-md-3 mb-3">
@@ -157,14 +157,14 @@
                                     <div class="form-check mt-1">
                                         <input type="checkbox" name="hapus_gambar_penetapan[]"
                                             value="{{ $gambar->id_gambar_penetapan }}" class="form-check-input">
-                                        <label class="form-check-label text-danger">Hapus</label>
+                                        <label class="form-check-label text-danger">Delete</label>
                                     </div>
                                 </div>
                             @endforeach
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="gambar_penetapan">Tambah Gambar Penetapan</label>
+                        <label for="gambar_penetapan">Add Supporting Documents Penetapan</label>
                         <input type="file" name="gambar_penetapan[]" class="form-control" multiple>
                     </div>
 
@@ -174,7 +174,7 @@
                         <textarea name="pelaksanaan" id="pelaksanaan" class="form-control summernote" rows="4" required>{!! $akreditasi->pelaksanaan->pelaksanaan !!}</textarea>
                     </div>
                     <div class="form-group">
-                        <label>Gambar Pelaksanaan</label>
+                        <label>Supporting Documents Pelaksanaan</label>
                         <div class="row">
                             @foreach ($akreditasi->pelaksanaan->gambarPelaksanaan as $gambar)
                                 <div class="col-md-3 mb-3">
@@ -196,7 +196,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="gambar_pelaksanaan">Tambah Gambar Pelaksanaan</label>
+                        <label for="gambar_pelaksanaan">Add Supporting Documents Pelaksanaan</label>
                         <input type="file" name="gambar_pelaksanaan[]" class="form-control" multiple>
                     </div>
 
@@ -206,7 +206,7 @@
                         <textarea name="evaluasi" id="evaluasi" class="form-control summernote" rows="4" required>{!! $akreditasi->evaluasi->evaluasi !!}</textarea>
                     </div>
                     <div class="form-group">
-                        <label>Gambar Evaluasi</label>
+                        <label>Supporting Documents Evaluasi</label>
                         <div class="row">
                             @foreach ($akreditasi->evaluasi->gambarEvaluasi as $gambar)
                                 <div class="col-md-3 mb-3">
@@ -221,14 +221,14 @@
                                     <div class="form-check mt-1">
                                         <input type="checkbox" name="hapus_gambar_evaluasi[]"
                                             value="{{ $gambar->id_gambar_evaluasi }}" class="form-check-input">
-                                        <label class="form-check-label text-danger">Hapus</label>
+                                        <label class="form-check-label text-danger">Delete</label>
                                     </div>
                                 </div>
                             @endforeach
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="gambar_evaluasi">Tambah Gambar Evaluasi</label>
+                        <label for="gambar_evaluasi">Add Documents Evaluasi</label>
                         <input type="file" name="gambar_evaluasi[]" class="form-control" multiple>
                     </div>
 
@@ -238,7 +238,7 @@
                         <textarea name="pengendalian" id="pengendalian" class="form-control summernote" rows="4" required>{!! $akreditasi->pengendalian->pengendalian !!}</textarea>
                     </div>
                     <div class="form-group">
-                        <label>Gambar Pengendalian</label>
+                        <label>Supporting Documents Pengendalian</label>
                         <div class="row">
                             @foreach ($akreditasi->pengendalian->gambarPengendalian as $gambar)
                                 <div class="col-md-3 mb-3">
@@ -253,14 +253,14 @@
                                     <div class="form-check mt-1">
                                         <input type="checkbox" name="hapus_gambar_pengendalian[]"
                                             value="{{ $gambar->id_gambar_pengendalian }}" class="form-check-input">
-                                        <label class="form-check-label text-danger">Hapus</label>
+                                        <label class="form-check-label text-danger">Delete</label>
                                     </div>
                                 </div>
                             @endforeach
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="gambar_pengendalian">Tambah Gambar Pengendalian</label>
+                        <label for="gambar_pengendalian">Add Supporting Documents Pengendalian</label>
                         <input type="file" name="gambar_pengendalian[]" class="form-control" multiple>
                     </div>
 
@@ -270,7 +270,7 @@
                         <textarea name="peningkatan" id="peningkatan" class="form-control summernote" rows="4" required>{!! $akreditasi->peningkatan->peningkatan !!}</textarea>
                     </div>
                     <div class="form-group">
-                        <label>Gambar Peningkatan</label>
+                        <label>Supporting Documents Peningkatan</label>
                         <div class="row">
                             @foreach ($akreditasi->peningkatan->gambarPeningkatan as $gambar)
                                 <div class="col-md-3 mb-3">
@@ -285,22 +285,22 @@
                                     <div class="form-check mt-1">
                                         <input type="checkbox" name="hapus_gambar_peningkatan[]"
                                             value="{{ $gambar->id_gambar_peningkatan }}" class="form-check-input">
-                                        <label class="form-check-label text-danger">Hapus</label>
+                                        <label class="form-check-label text-danger">Delete</label>
                                     </div>
                                 </div>
                             @endforeach
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="gambar_peningkatan">Tambah Gambar Peningkatan</label>
+                        <label for="gambar_peningkatan">Add Supporting Documents Peningkatan</label>
                         <input type="file" name="gambar_peningkatan[]" class="form-control" multiple>
                     </div>
 
                     {{-- Tombol Submit --}}
                     <div class="form-group text-right">
                         <a href="{{ route('akreditasi.index', ['slug' => $akreditasi->kriteria->route]) }}"
-                            class="btn btn-secondary">Kembali</a>
-                        <button type="submit" class="btn btn-success">Simpan Perubahan</button>
+                            class="btn btn-secondary">Back</a>
+                        <button type="submit" class="btn btn-success">Save Changesn</button>
                         <button id="btn-generate-pdf" type="button" class="btn btn-warning">Generate PDF</button>
                     </div>
                 </form>

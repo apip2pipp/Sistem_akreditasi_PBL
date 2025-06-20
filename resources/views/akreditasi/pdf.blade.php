@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Accreditation Draft</title>
+    <title>Draft Akreditasi</title>
     <style>
         body {
             font-family: sans-serif;
