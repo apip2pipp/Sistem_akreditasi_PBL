@@ -14,9 +14,9 @@
                     <table class="table table-striped table-hover table-full-width" id="table_master">
                         <thead>
                             <tr>
-                                <th>Number</th>
+                                <th>No</th>
                                 <th>Title of PPEPP</th>
-                                <th>Status</th>
+                                <th>status</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -79,12 +79,6 @@
                                     onclick="modalAction('{{ url('akreditasi/show-draft2') }}/${data}/show')"
                                     title="Show Data">
                                     <i class="fa fa-eye"></i>
-                                </a>
-                                <a href="javascript:void(0)"
-                                    class="btn btn-xs btn-danger text-white"
-                                    onclick="modalAction('{{ url('management-users/direktur-utama') }}/${data}/delete')"
-                                    title="Hapus Data">
-                                    <i class="fa fa-trash"></i>
                                 </a>`;
                             return html;
                         }

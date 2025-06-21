@@ -1,7 +1,7 @@
 <div id="modal-master" class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title">Detail Akreditasi</h5>
+            <h5 class="modal-title">Accreditation Details</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
@@ -9,7 +9,7 @@
 
         <div class="modal-body">
             <div class="form-group row">
-                <label class="col-sm-3 font-weight-bold">Judul PPEPP</label>
+                <label class="col-sm-3 font-weight-bold">Title of PPEPP</label>
                 <div class="col-sm-9">
                     <p class="form-control-plaintext">{{ $akreditasi->judul_ppepp }}</p>
                 </div>
@@ -19,6 +19,92 @@
             <div class="mb-4">
                 <embed src="{{ url('storage/' . $fileAkreditasi->file_akreditasi) }}" type="application/pdf"
                     width="100%" height="600px">
+            </div>
+
+            @php use Illuminate\Support\Str; @endphp
+            {{-- gambar penetapan --}}
+            <div class="form-group">
+                <label>Supporting Documents Penetapan</label>
+                <div class="row">
+                    @foreach ($akreditasi->penetapan->gambarPenetapan as $gambar)
+                        <div class="col-md-3 mb-3">
+                            @if (Str::startsWith($gambar->mime_type, 'image/'))
+                                <img src="{{ asset('storage/' . $gambar->gambar_penetapan) }}" class="img-thumbnail">
+                            @elseif($gambar->mime_type === 'application/pdf')
+                                <a href="{{ asset('storage/' . $gambar->gambar_penetapan) }}" target="_blank">See
+                                    PDF</a>
+                            @endif
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+
+            {{-- gambar PELAKSANAAN --}}
+            <div class="form-group">
+                <label>Supporting Documents Pelaksanaan</label>
+                <div class="row">
+                    @foreach ($akreditasi->pelaksanaan->gambarPelaksanaan as $gambar)
+                        <div class="col-md-3 mb-3">
+                            @if (Str::startsWith($gambar->mime_type, 'image/'))
+                                <img src="{{ asset('storage/' . $gambar->gambar_pelaksanaan) }}" class="img-thumbnail">
+                            @elseif($gambar->mime_type === 'application/pdf')
+                                <a href="{{ asset('storage/' . $gambar->gambar_pelaksanaan) }}" target="_blank">See
+                                    PDF</a>
+                            @endif
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+
+            {{-- gambar EVALUASI --}}
+            <div class="form-group">
+                <label>Supporting Documents Evaluasi</label>
+                <div class="row">
+                    @foreach ($akreditasi->evaluasi->gambarEvaluasi as $gambar)
+                        <div class="col-md-3 mb-3">
+                            @if (Str::startsWith($gambar->mime_type, 'image/'))
+                                <img src="{{ asset('storage/' . $gambar->gambar_evaluasi) }}" class="img-thumbnail">
+                            @elseif($gambar->mime_type === 'application/pdf')
+                                <a href="{{ asset('storage/' . $gambar->gambar_evaluasi) }}" target="_blank">See
+                                    PDF</a>
+                            @endif
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+
+            {{-- gambar PENGENDALIAN --}}
+            <div class="form-group">
+                <label>Supporting Documents Pengendalian</label>
+                <div class="row">
+                    @foreach ($akreditasi->pengendalian->gambarPengendalian as $gambar)
+                        <div class="col-md-3 mb-3">
+                            @if (Str::startsWith($gambar->mime_type, 'image/'))
+                                <img src="{{ asset('storage/' . $gambar->gambar_pengendalian) }}" class="img-thumbnail">
+                            @elseif($gambar->mime_type === 'application/pdf')
+                                <a href="{{ asset('storage/' . $gambar->gambar_pengendalian) }}" target="_blank">See
+                                    PDF</a>
+                            @endif
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+
+            {{-- gambar PENINGKATAN --}}
+            <div class="form-group">
+                <label>Supporting Documents Peningkatan</label>
+                <div class="row">
+                    @foreach ($akreditasi->peningkatan->gambarPeningkatan as $gambar)
+                        <div class="col-md-3 mb-3">
+                            @if (Str::startsWith($gambar->mime_type, 'image/'))
+                                <img src="{{ asset('storage/' . $gambar->gambar_peningkatan) }}" class="img-thumbnail">
+                            @elseif($gambar->mime_type === 'application/pdf')
+                                <a href="{{ asset('storage/' . $gambar->gambar_peningkatan) }}" target="_blank">See
+                                    PDF</a>
+                            @endif
+                        </div>
+                    @endforeach
+                </div>
             </div>
 
             @if (auth()->user()->level->level_nama === 'Kaprodi' || auth()->user()->level->level_kode === 'KPD')
@@ -33,10 +119,10 @@
                             <select name="status_kaprodi" id="status_kaprodi" class="form-control" required>
                                 <option value="Disetujui"
                                     {{ old('status_kaprodi', $fileAkreditasi->status_kaprodi) == 'Disetujui' ? 'selected' : '' }}>
-                                    Disetujui</option>
+                                    Approved</option>
                                 <option value="Ditolak"
                                     {{ old('status_kaprodi', $fileAkreditasi->status_kaprodi) == 'Ditolak' ? 'selected' : '' }}>
-                                    Ditolak</option>
+                                    Rejected</option>
                             </select>
                             @error('status_kaprodi')
                                 <div class="text-danger">{{ $message }}</div>
@@ -44,7 +130,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="komentar_kaprodi">Komentar Kaprodi:</label>
+                            <label for="komentar_kaprodi">Comments from Kaprodi:</label>
                             <textarea name="komentar_kaprodi" id="komentar_kaprodi" class="form-control" rows="4" required>{{ old('komentar_kaprodi', $fileAkreditasi->komentar_kaprodi) }}</textarea>
                             @error('komentar_kaprodi')
                                 <div class="text-danger">{{ $message }}</div>
@@ -71,10 +157,10 @@
                             <select name="status_kajur" id="status_kajur" class="form-control" required>
                                 <option value="Disetujui"
                                     {{ old('status_kajur', $fileAkreditasi->status_kajur) == 'Disetujui' ? 'selected' : '' }}>
-                                    Disetujui</option>
+                                    Approved</option>
                                 <option value="Ditolak"
                                     {{ old('status_kajur', $fileAkreditasi->status_kajur) == 'Ditolak' ? 'selected' : '' }}>
-                                    Ditolak</option>
+                                    Rejected</option>
                             </select>
                             @error('status_kajur')
                                 <div class="text-danger">{{ $message }}</div>
@@ -82,7 +168,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="komentar_kajur">Komentar Kajur:</label>
+                            <label for="komentar_kajur">Comments from Kajur:</label>
                             <textarea name="komentar_kajur" id="komentar_kajur" class="form-control" rows="4" required>{{ old('komentar_kajur', $fileAkreditasi->komentar_kajur) }}</textarea>
                             @error('komentar_kajur')
                                 <div class="text-danger">{{ $message }}</div>
@@ -110,10 +196,10 @@
                             <select name="status_kjm" id="status_kjm" class="form-control" required>
                                 <option value="Disetujui"
                                     {{ old('status_kjm', $fileAkreditasi->status_kjm) == 'Disetujui' ? 'selected' : '' }}>
-                                    Disetujui</option>
+                                    Approved</option>
                                 <option value="Ditolak"
                                     {{ old('status_kjm', $fileAkreditasi->status_kjm) == 'Ditolak' ? 'selected' : '' }}>
-                                    Ditolak</option>
+                                    Rejected</option>
                             </select>
                             @error('status_kjm')
                                 <div class="text-danger">{{ $message }}</div>
@@ -121,7 +207,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="komentar_kjm">Komentar KJM:</label>
+                            <label for="komentar_kjm">Comments from KJM:</label>
                             <textarea name="komentar_kjm" id="komentar_kjm" class="form-control" rows="4" required>{{ old('komentar_kjm', $fileAkreditasi->komentar_kjm) }}</textarea>
                             @error('komentar_kjm')
                                 <div class="text-danger">{{ $message }}</div>
@@ -152,10 +238,10 @@
                                 required>
                                 <option value="Disetujui"
                                     {{ old('status_direktur_utama', $fileAkreditasi->status_direktur_utama) == 'Disetujui' ? 'selected' : '' }}>
-                                    Disetujui</option>
+                                    Approved</option>
                                 <option value="Ditolak"
                                     {{ old('status_direktur_utama', $fileAkreditasi->status_direktur_utama) == 'Ditolak' ? 'selected' : '' }}>
-                                    Ditolak</option>
+                                    Rejected</option>
                             </select>
                             @error('status_direktur_utama')
                                 <div class="text-danger">{{ $message }}</div>
@@ -163,7 +249,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="komentar_direktur_utama">Komentar Direktur Utama:</label>
+                            <label for="komentar_direktur_utama">Comments from Direktur Utama:</label>
                             <textarea name="komentar_direktur_utama" id="komentar_direktur_utama" class="form-control" rows="4" required>{{ old('komentar_direktur_utama', $fileAkreditasi->komentar_direktur_utama) }}</textarea>
                             @error('komentar_direktur_utama')
                                 <div class="text-danger">{{ $message }}</div>
@@ -176,7 +262,7 @@
             @endif
 
             <div class="mt-4">
-                <h5>Status dan Komentar</h5>
+                <h5>Status and Comments</h5>
                 @foreach ($fileAkreditasiShow as $file)
                     {{-- Kaprodi --}}
                     @if ($file->status_kaprodi)
@@ -194,7 +280,7 @@
                                 <p class="mt-2">
                                     <strong>Status:</strong> {{ $file->status_kaprodi ?? '-' }}
                                 </p>
-                                <h6><strong>Komentar:</strong></h6>
+                                <h6><strong>Comments:</strong></h6>
                                 <p>{!! $file->komentar_kaprodi ?? '-' !!}</p>
                             </div>
                         </div>
@@ -216,7 +302,7 @@
                                 <p class="mt-2">
                                     <strong>Status:</strong> {{ $file->status_kajur ?? '-' }}
                                 </p>
-                                <h6><strong>Komentar:</strong></h6>
+                                <h6><strong>Comments:</strong></h6>
                                 <p>{!! $file->komentar_kajur ?? '-' !!}</p>
                             </div>
                         </div>
@@ -238,7 +324,7 @@
                                 <p class="mt-2">
                                     <strong>Status:</strong> {{ $file->status_kjm ?? '-' }}
                                 </p>
-                                <h6><strong>Komentar:</strong></h6>
+                                <h6><strong>Comments:</strong></h6>
                                 <p>{!! $file->komentar_kjm ?? '-' !!}</p>
                             </div>
                         </div>
@@ -260,7 +346,7 @@
                                 <p class="mt-2">
                                     <strong>Status:</strong> {{ $file->status_direktur_utama ?? '-' }}
                                 </p>
-                                <h6><strong>Komentar:</strong></h6>
+                                <h6><strong>Comments:</strong></h6>
                                 <p>{!! $file->komentar_direktur_utama ?? '-' !!}</p>
                             </div>
                         </div>
