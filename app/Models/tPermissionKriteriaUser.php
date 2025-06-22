@@ -14,14 +14,14 @@ class tPermissionKriteriaUser extends Model
     protected $primaryKey = 'id_permission_kriteria_user';
 
     protected $fillable = [
-        'koordinator_id',
+        'user_id',
         'kriteria_id',
         'status',
     ];
 
     public function koordinator()
     {
-        return $this->belongsTo(mKoordinator::class, 'koordinator_id');
+        return $this->belongsTo(mUser::class, 'user_id');
     }
 
     public function kriteria()

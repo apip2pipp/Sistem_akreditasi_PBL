@@ -13,7 +13,10 @@ class tPenetapan extends Model
     protected $primaryKey = 'id_penetapan';
     protected $fillable = ['penetapan'];
 
-
+    public function gambarPenetapan()
+    {
+        return $this->hasMany(tGambarPenetapan::class, 'penetapan_id');
+    }
 
     public function akreditasi()
     {

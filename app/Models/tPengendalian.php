@@ -13,6 +13,10 @@ class tPengendalian extends Model
     protected $primaryKey = 'id_pengendalian';
     protected $fillable = ['pengendalian'];
 
+    public function gambarPengendalian()
+    {
+        return $this->hasMany(tGambarPengendalian::class, 'pengendalian_id');
+    }
 
     public function akreditasi()
     {

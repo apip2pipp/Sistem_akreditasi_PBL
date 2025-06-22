@@ -13,6 +13,10 @@ class tEvaluasi extends Model
     protected $primaryKey = 'id_evaluasi';
     protected $fillable = ['evaluasi'];
 
+    public function gambarEvaluasi()
+    {
+        return $this->hasMany(tGambarEvaluasi::class, 'evaluasi_id');
+    }
 
     public function akreditasi()
     {
