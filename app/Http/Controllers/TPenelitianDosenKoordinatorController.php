@@ -35,12 +35,12 @@ class TPenelitianDosenKoordinatorController extends Controller
     public function index()
     {
         $breadcrumb = (object)[
-            'title' => 'Daftar Penelitian Dosen',
-            'list' => ['Home', 'Penelitian Dosen']
+            'title' => 'List of Lecturer Research',
+            'list' => ['Home', 'Lecturer Research']
         ];
 
         $page = (object)[
-            'title' => 'Daftar penelitian dosen yang terdaftar dalam sistem'
+            'title' => 'List of faculty research projects registered in the system'
         ];
         return view('penelitian-dosen.koordinator.index', compact('breadcrumb', 'page'));
     }
@@ -81,7 +81,7 @@ class TPenelitianDosenKoordinatorController extends Controller
 
         if ($validator->fails()) {
             return response()->json([
-                'message' => 'Validasi Gagal',
+                'message' => 'Validation Failed',
                 'msgField' => $validator->errors()
             ], Response::HTTP_BAD_REQUEST);
         }
@@ -106,7 +106,7 @@ class TPenelitianDosenKoordinatorController extends Controller
         Log::info('Penelitian created: ', $penelitian->toArray());
 
         return response()->json([
-            'message' => 'Data penelitian dengan dosen berhasil disimpan'
+            'message' => 'Research data with lecturers successfully saved'
         ], Response::HTTP_OK);
     }
 
@@ -174,19 +174,19 @@ class TPenelitianDosenKoordinatorController extends Controller
 
         if (!$penelitianDosen) {
             return response()->json([
-                'message' => 'Data penelitian dosen tidak ditemukan.'
+                'message' => 'No research data from lecturers was found.'
             ], Response::HTTP_NOT_FOUND);
         }
 
         if ($penelitianDosen->status == 'accepted') {
             return response()->json([
-                'message' => 'Penelitian Sudah di Setujui oleh Dosen tidak bisa update'
+                'message' => 'Research Approved by Lecturer Cannot Be Updated'
             ], Response::HTTP_BAD_REQUEST);
         }
 
         if ($penelitianDosen->status == 'rejected') {
             return response()->json([
-                'message' => 'Penelitian Sudah di Tolak oleh Dosen tidak bisa update'
+                'message' => 'Research has been rejected by lecturers and cannot be updated.'
             ], Response::HTTP_BAD_REQUEST);
         }
 
@@ -210,7 +210,7 @@ class TPenelitianDosenKoordinatorController extends Controller
         Log::info('Penelitian updated: ', $penelitian->toArray());
 
         return response()->json([
-            'message' => 'Data penelitian dan dosen berhasil diupdate'
+            'message' => 'Research data and lecturers successfully updated'
         ], Response::HTTP_OK);
     }
 
@@ -231,19 +231,19 @@ class TPenelitianDosenKoordinatorController extends Controller
             // dd($penelitianDosen);
             if (!$penelitianDosen) {
                 return response()->json([
-                    'message' => 'Data tidak ditemukan'
+                    'message' => 'Data not found'
                 ], Response::HTTP_NOT_FOUND);
             }
 
             if ($penelitianDosen->status == 'accepted') {
                 return response()->json([
-                    'message' => 'Penelitian Sudah di Setujui oleh Dosen tidak bisa dihapus'
+                    'message' => 'Research that has been approved by a lecturer cannot be deleted.'
                 ], Response::HTTP_BAD_REQUEST);
             }
 
             if ($penelitianDosen->status == 'rejected') {
                 return response()->json([
-                    'message' => 'Penelitian Sudah di Tolak oleh Dosen tidak bisa dihapus'
+                    'message' => 'Research that has been rejected by lecturers cannot be deleted.'
                 ], Response::HTTP_BAD_REQUEST);
             }
 
@@ -253,13 +253,13 @@ class TPenelitianDosenKoordinatorController extends Controller
                 Log::info("tPenelitianDosen ID $id berhasil dihapus.");
 
                 return response()->json([
-                    'message' => 'Relasi dosen dalam penelitian berhasil dihapus!'
+                    'message' => 'The relationship between lecturers in the study was successfully removed.!'
                 ], Response::HTTP_OK);
             } catch (\Exception $e) {
                 Log::error("Gagal menghapus tPenelitianDosen ID $id: " . $e->getMessage());
 
                 return response()->json([
-                    'message' => 'Terjadi kesalahan saat menghapus data.'
+                    'message' => 'An error occurred while deleting data.'
                 ], Response::HTTP_INTERNAL_SERVER_ERROR);
             }
         }
