@@ -1,13 +1,15 @@
-<footer class="main-footer">
-    <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong>
-    All rights reserved.
+{{-- @vite('resources/css/app.css') --}}
+<footer class="main-footer text-ijo3">
+    <strong class=" text-ijo3">Copyright &copy; 2025-2090 <a class=" text-ijo1"
+            href="https://www.instagram.com/apip.pipp/">SISCRED</a>.</strong>
+All rights reserved.
     <div class="float-right d-none d-sm-inline-block">
-      <b>Version</b> 3.2.0
+        <b>Version</b> 9.9.9
     </div>
-  </footer>
+</footer>
 
-  <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
+<!-- Control Sidebar -->
+<aside class="control-sidebar control-sidebar-dark">
     <!-- Control sidebar content goes here -->
-  </aside>
-  <!-- /.control-sidebar -->
+</aside>
+<!-- /.control-sidebar -->
